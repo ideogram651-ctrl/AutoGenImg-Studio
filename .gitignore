@@ -1,0 +1,36 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+Thumbs.db
+*.log
+.env*
+!.env.example
+
+# Development caches
+.vite/
+.aistudio/
+
+# Temporary files
+tmp-*/
+*.tmp
+*.part
+*.bak
+*.jsonl
+
+# Test artifacts
+test-results/
+test_output.txt
+
+# Runtime data (user-specific, must not be committed)
+browser-profile/
+project-data/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

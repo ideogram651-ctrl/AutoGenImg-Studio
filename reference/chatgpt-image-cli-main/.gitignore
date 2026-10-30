@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.chatgpt-image/
+.playwright-cli/
+e2e-output/
+e2e-request.json
+coverage/
+.env
+.env.*
+*.log
+*.part
+*.tgz

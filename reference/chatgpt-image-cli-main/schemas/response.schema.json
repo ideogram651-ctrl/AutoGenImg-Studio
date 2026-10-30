@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChatGPT Image CLI Result",
+  "type": "object",
+  "required": ["status", "task_id", "prompt_sent", "reference_images", "elapsed_seconds", "images", "assistant_text"],
+  "properties": {
+    "status": {
+      "enum": ["completed", "login_required", "human_action_required", "content_blocked", "timed_out", "download_failed", "ui_changed", "failed"]
+    },
+    "task_id": { "type": "string" },
+    "thread_id": { "type": "string" },
+    "thread_url": { "type": "string", "format": "uri" },
+    "prompt_sent": { "type": "string" },
+    "reference_images": { "type": "array", "items": { "type": "string" } },
+    "elapsed_seconds": { "type": "integer", "minimum": 0 },
+    "worked_for_text": { "type": "string" },
+    "assistant_text": { "type": "string" },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "width", "height", "bytes"],
+        "properties": {
+          "path": { "type": "string" },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "format": { "type": "string" },
+          "bytes": { "type": "integer", "minimum": 1 },
+          "source_url": { "type": "string" }
+        }
+      }
+    },
+    "can_resume": { "type": "boolean" },
+    "prompt_submitted": { "type": "boolean" },
+    "screenshot_path": { "type": "string" },
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "page_text": { "type": "string" }
+      }
+    }
+  }
+}

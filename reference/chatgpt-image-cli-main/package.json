@@ -1,0 +1,47 @@
+{
+  "name": "chatgpt-image-cli",
+  "version": "0.1.0",
+  "description": "Agent-agnostic CLI for generating and iterating ChatGPT images through an existing Chrome session.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mxzs123/chatgpt-image-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mxzs123/chatgpt-image-cli/issues"
+  },
+  "homepage": "https://github.com/mxzs123/chatgpt-image-cli#readme",
+  "type": "module",
+  "bin": {
+    "chatgpt-image": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    "schemas",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run build && npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@playwright/cli": "^0.1.17",
+    "commander": "^14.0.1",
+    "sharp": "^0.34.5",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

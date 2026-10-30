@@ -1,0 +1,9 @@
+{
+  "task_id": "atk1-keyframe-v2",
+  "mode": "continue",
+  "thread_id": "replace-with-chatgpt-thread-id",
+  "prompt": "只修改下半身承重，保持上半身、武器和背景不变。",
+  "reference_images": [],
+  "output_dir": "C:/path/output",
+  "timeout_seconds": 600
+}

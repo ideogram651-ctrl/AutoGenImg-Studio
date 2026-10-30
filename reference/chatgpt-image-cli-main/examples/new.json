@@ -1,0 +1,12 @@
+{
+  "task_id": "atk1-keyframe-v1",
+  "mode": "new",
+  "prompt": "生成一张用于 2D 横版动作游戏的最大蓄力关键帧。",
+  "reference_images": [
+    "C:/path/reference_1.png",
+    "C:/path/reference_2.png"
+  ],
+  "output_dir": "C:/path/output",
+  "title": "Atk1 最大蓄力关键帧",
+  "timeout_seconds": 600
+}
