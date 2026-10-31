@@ -93,34 +93,22 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
   return (
     <div className="space-y-6">
       {/* Hero Welcome Banner */}
-      <div
-        className="p-6 rounded-xl glass-panel relative overflow-hidden"
-        style={{ borderColor: 'var(--surface-border)' }}
-      >
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-4">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-3">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Verifiable Local-First Architecture &bull; Visible Browser Automation</span>
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight mb-2" style={{ color: 'var(--text-primary)' }}>
-              Orchestrate AI Video Visuals from Script to Saved Files
-            </h2>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Prepare structured prompt bundles, map multi-category references (character, style, environment), execute sequential browser-driven generation, verify downloads into ID-based files, and review exceptions without blind regeneration.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2.5">
+      <section className="panel hero">
+        <div className="hero-copy">
+          <span className="studio-eyebrow">THE VISUAL PRODUCTION WORKSPACE</span>
+          <h2>Every frame.<br /><em>Under control.</em></h2>
+          <p className="hero-original-title">Orchestrate AI video visuals — from script to saved files.</p>
+          <p>Prepare structured prompt bundles, map multi-category references (character, style, environment), execute sequential browser-driven generation, verify downloads into ID-based files, and review exceptions without blind regeneration.</p>
+          <div className="actions">
             <button
               onClick={onOpenNewProjectModal}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md transition-all"
+              className="btn primary"
             >
               <FolderPlus className="w-4 h-4" />
               <span>Create Project</span>
             </button>
 
-            <label className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-semibold hover:bg-white/10 cursor-pointer transition-colors glass-card">
+            <label className="btn">
               <Upload className="w-4 h-4 text-sky-400" />
               <span>{importLoading ? 'Importing...' : 'Import Project (.ZIP)'}</span>
               <input
@@ -141,7 +129,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
                       resumeRun();
                       setActivePage('monitor');
                     }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold bg-amber-600 hover:bg-amber-500 text-white shadow-md transition-all"
+                    className="btn green"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Resume Queue ({queueState.pauseReason || 'Paused'})</span>
@@ -149,7 +137,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
                 ) : status === 'RUNNING' ? (
                   <button
                     onClick={() => setActivePage('monitor')}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md transition-all"
+                    className="btn primary"
                   >
                     <Play className="w-4 h-4 fill-current" />
                     <span>View Running Queue ({queueState.percentage}%)</span>
@@ -160,7 +148,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
                       setActivePage('monitor');
                       startRun();
                     }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition-all"
+                    className="btn green"
                   >
                     <Play className="w-4 h-4 fill-current" />
                     <span>Start Run ({totalPrompts} Prompts)</span>
@@ -170,8 +158,12 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
             )}
           </div>
         </div>
-      </div>
-
+        <div className="hero-art">
+          <div className="hero-frame" style={{ backgroundImage: 'url(/assets/artwork/art-1.png)' }} />
+          <div className="hero-frame" style={{ backgroundImage: 'url(/assets/artwork/art-2.png)' }} />
+          <small>Reference artwork</small>
+        </div>
+      </section>
       {saveStatus.kind !== 'idle' && currentProject && (
         <div
           className={`p-3 rounded-lg text-xs font-medium flex items-center justify-between gap-2 ${
