@@ -1,0 +1,62 @@
+/* arctic-blue original theme tokens, gradients and glass parameters. */
+
+:root[data-theme="arctic-blue"] {
+  color-scheme: dark;
+  --color-background: #091323;
+  --color-secondary: #101f36;
+  --color-surface: rgba(23, 44, 71, 0.84);
+  --color-card: rgba(29, 54, 82, 0.82);
+  --color-border: rgba(133, 181, 255, 0.21);
+  --color-text: #edf6ff;
+  --color-muted: #afc3da;
+  --color-primary: #85b5ff;
+  --color-primary-soft: rgba(133, 181, 255, 0.14);
+  --color-success: #99cabb;
+  --color-warning: #d8bf97;
+  --color-error: #e1a5b4;
+  --on-primary: #091323;
+  --inset: rgba(11, 24, 42, 0.88);
+  --hover: rgba(133, 181, 255, 0.16);
+  --shadow-card:
+    0 12px 34px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --shadow-overlay: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --theme-canvas:
+    radial-gradient(ellipse at 84% 2%, rgba(18, 44, 83, 0.36), transparent 43%),
+    radial-gradient(
+      ellipse at 8% 78%,
+      rgba(44, 139, 155, 0.1),
+      transparent 48%
+    ),
+    linear-gradient(155deg, #091323 35%, #101f36 100%);
+  --theme-sidebar: linear-gradient(
+    172deg,
+    rgba(16, 31, 54, 0.94),
+    rgba(9, 19, 35, 0.94)
+  );
+  --theme-utility: rgba(16, 31, 54, 0.87);
+  --theme-panel: linear-gradient(
+    145deg,
+    rgba(23, 44, 71, 0.85),
+    rgba(16, 31, 54, 0.9)
+  );
+  --theme-card: linear-gradient(
+    138deg,
+    rgba(29, 54, 82, 0.82),
+    rgba(23, 44, 71, 0.86)
+  );
+  --theme-context: linear-gradient(
+    160deg,
+    rgba(16, 31, 54, 0.88),
+    rgba(11, 24, 42, 0.88)
+  );
+  --theme-button: linear-gradient(125deg, #85b5ff, #a3e2f4);
+  --theme-button-text: #091323;
+  --theme-progress: linear-gradient(90deg, #a3e2f4, #85b5ff);
+  --theme-overlay: rgba(9, 19, 35, 0.76);
+  --theme-nav: linear-gradient(
+    105deg,
+    rgba(133, 181, 255, 0.23),
+    rgba(133, 181, 255, 0.07)
+  );
+  --theme-saturation: 135%;
+}

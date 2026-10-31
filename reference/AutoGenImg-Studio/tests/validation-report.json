@@ -1,0 +1,2678 @@
+{
+  "browser": "Playwright Chromium",
+  "viewport": "1440x1000; responsive 390x844, 768x1024, 1920x1080",
+  "baseline_comparisons": 120,
+  "all_passed": true,
+  "test_count": 469,
+  "pages": [
+    "dashboard",
+    "project",
+    "guide",
+    "bundle",
+    "references",
+    "monitor",
+    "gallery",
+    "review",
+    "reports",
+    "offline",
+    "settings",
+    "inventory"
+  ],
+  "themes": [
+    "dark",
+    "light",
+    "aurora-violet",
+    "arctic-blue",
+    "lavender-mist",
+    "midnight-orchid",
+    "obsidian-amethyst",
+    "carbon-graphite",
+    "midnight-sapphire",
+    "dark-titanium"
+  ],
+  "dialogs": [
+    "create-project",
+    "delete-project",
+    "paste-json",
+    "view-json",
+    "edit-json",
+    "edit-prompt",
+    "add-reference-upload",
+    "add-reference-text",
+    "edit-reference",
+    "regenerate-all",
+    "delete-run",
+    "report-preview",
+    "viewer-1",
+    "viewer-2",
+    "viewer-3",
+    "viewer-4",
+    "viewer-5"
+  ],
+  "tests": [
+    {
+      "test": "ES module initialization and default page",
+      "passed": true
+    },
+    {
+      "test": "No remote resource requests",
+      "passed": true
+    },
+    {
+      "test": "All external stylesheets parsed",
+      "passed": true
+    },
+    {
+      "test": "Exactly ten theme choices",
+      "passed": true
+    },
+    {
+      "test": "Theme dark selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "dark / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "dark / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / project routing",
+      "passed": true
+    },
+    {
+      "test": "dark / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / guide routing",
+      "passed": true
+    },
+    {
+      "test": "dark / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "dark / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / references routing",
+      "passed": true
+    },
+    {
+      "test": "dark / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "dark / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "dark / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / review routing",
+      "passed": true
+    },
+    {
+      "test": "dark / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / reports routing",
+      "passed": true
+    },
+    {
+      "test": "dark / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / offline routing",
+      "passed": true
+    },
+    {
+      "test": "dark / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / settings routing",
+      "passed": true
+    },
+    {
+      "test": "dark / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "dark / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "dark / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme light selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "light / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "light / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / project routing",
+      "passed": true
+    },
+    {
+      "test": "light / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / guide routing",
+      "passed": true
+    },
+    {
+      "test": "light / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "light / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / references routing",
+      "passed": true
+    },
+    {
+      "test": "light / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "light / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "light / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / review routing",
+      "passed": true
+    },
+    {
+      "test": "light / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / reports routing",
+      "passed": true
+    },
+    {
+      "test": "light / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / offline routing",
+      "passed": true
+    },
+    {
+      "test": "light / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / settings routing",
+      "passed": true
+    },
+    {
+      "test": "light / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "light / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "light / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "light / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme aurora-violet selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / project routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / guide routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / references routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / review routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / reports routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / offline routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / settings routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "aurora-violet / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme arctic-blue selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / project routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / guide routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / references routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / review routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / reports routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / offline routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / settings routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "arctic-blue / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme lavender-mist selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / project routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / guide routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / references routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / review routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / reports routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / offline routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / settings routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "lavender-mist / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme midnight-orchid selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / project routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / guide routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / references routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / review routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / reports routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / offline routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / settings routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-orchid / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme obsidian-amethyst selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / project routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / guide routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / references routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / review routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / reports routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / offline routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / settings routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "obsidian-amethyst / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme carbon-graphite selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / project routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / guide routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / references routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / review routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / reports routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / offline routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / settings routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "carbon-graphite / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme midnight-sapphire selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / project routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / guide routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / references routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / review routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / reports routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / offline routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / settings routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "midnight-sapphire / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Theme dark-titanium selection and indicators",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / dashboard routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / dashboard full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / project routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / project full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / guide routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / guide full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / bundle routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / bundle full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / references routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / references full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / monitor routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / monitor full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / gallery routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / gallery full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / review routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / review full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / reports routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / reports full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / offline routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / offline full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / settings routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / settings full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / inventory routing",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / inventory full-page pixel parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / create-project dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "dark-titanium / viewer-1 dialog style parity",
+      "passed": true
+    },
+    {
+      "test": "Toolbar theme cycle",
+      "passed": true
+    },
+    {
+      "test": "Desktop sidebar collapse",
+      "passed": true
+    },
+    {
+      "test": "Navigation dashboard updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation project updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation guide updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation bundle updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation references updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation monitor updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation gallery updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation review updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation reports updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation offline updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation settings updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Navigation inventory updates page and title",
+      "passed": true
+    },
+    {
+      "test": "Sidebar click routing",
+      "passed": true
+    },
+    {
+      "test": "Browser history navigation",
+      "passed": true
+    },
+    {
+      "test": "Unknown route fallback",
+      "passed": true
+    },
+    {
+      "test": "prompt-search empty state",
+      "passed": true
+    },
+    {
+      "test": "prompt-search restores items",
+      "passed": true
+    },
+    {
+      "test": "gallery-search empty state",
+      "passed": true
+    },
+    {
+      "test": "gallery-search restores items",
+      "passed": true
+    },
+    {
+      "test": "manifest-search empty state",
+      "passed": true
+    },
+    {
+      "test": "manifest-search restores items",
+      "passed": true
+    },
+    {
+      "test": "Captured log error filter",
+      "passed": true
+    },
+    {
+      "test": "Log search empty state",
+      "passed": true
+    },
+    {
+      "test": "Full prompt disclosure",
+      "passed": true
+    },
+    {
+      "test": "Prompt collapse",
+      "passed": true
+    },
+    {
+      "test": "Reference mapping disclosure",
+      "passed": true
+    },
+    {
+      "test": "Asset individual selection",
+      "passed": true
+    },
+    {
+      "test": "Selected asset preview",
+      "passed": true
+    },
+    {
+      "test": "Viewer next",
+      "passed": true
+    },
+    {
+      "test": "Viewer previous",
+      "passed": true
+    },
+    {
+      "test": "Select all gallery assets",
+      "passed": true
+    },
+    {
+      "test": "Clear gallery selection",
+      "passed": true
+    },
+    {
+      "test": "Gallery density comfortable",
+      "passed": true
+    },
+    {
+      "test": "Gallery density compact",
+      "passed": true
+    },
+    {
+      "test": "Dialog create-project opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog create-project focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog create-project background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog create-project reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog create-project forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog create-project closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-project opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-project focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-project background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-project reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-project forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-project closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog paste-json opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog paste-json focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog paste-json background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog paste-json reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog paste-json forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog paste-json closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog view-json opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog view-json focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog view-json background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog view-json reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog view-json forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog view-json closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-json opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-json focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-json background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-json reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-json forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-json closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-prompt opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-prompt focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-prompt background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-prompt reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-prompt forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-prompt closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-upload opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-upload focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-upload background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-upload reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-upload forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-upload closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-text opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-text focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-text background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-text reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-text forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog add-reference-text closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-reference opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-reference focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-reference background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-reference reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-reference forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog edit-reference closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog regenerate-all opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog regenerate-all focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog regenerate-all background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog regenerate-all reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog regenerate-all forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog regenerate-all closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-run opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-run focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-run background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-run reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-run forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog delete-run closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog report-preview opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog report-preview focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog report-preview background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog report-preview reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog report-preview forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog report-preview closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-1 opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-1 focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-1 background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-1 reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-1 forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-1 closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-2 opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-2 focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-2 background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-2 reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-2 forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-2 closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-3 opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-3 focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-3 background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-3 reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-3 forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-3 closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-4 opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-4 focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-4 background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-4 reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-4 forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-4 closes",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-5 opens",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-5 focus",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-5 background inert",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-5 reverse focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-5 forward focus trap",
+      "passed": true
+    },
+    {
+      "test": "Dialog viewer-5 closes",
+      "passed": true
+    },
+    {
+      "test": "Modal opener focus restoration",
+      "passed": true
+    },
+    {
+      "test": "Modal backdrop close",
+      "passed": true
+    },
+    {
+      "test": "Guide step 1 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Guide step 2 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Guide step 3 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Guide step 4 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Guide step 5 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Guide step 6 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Guide step 7 keyboard",
+      "passed": true
+    },
+    {
+      "test": "Skip link focuses current heading",
+      "passed": true
+    },
+    {
+      "test": "Screen reader announcements",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / dashboard style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / project style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / guide style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / bundle style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / references style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / monitor style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / gallery style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / review style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / reports style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / offline style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / settings style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 390px / inventory style parity",
+      "passed": true
+    },
+    {
+      "test": "Mobile navigation opens",
+      "passed": true
+    },
+    {
+      "test": "Mobile navigation Escape",
+      "passed": true
+    },
+    {
+      "test": "Mobile navigation backdrop",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / dashboard style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / project style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / guide style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / bundle style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / references style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / monitor style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / gallery style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / review style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / reports style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / offline style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / settings style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 768px / inventory style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / dashboard style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / project style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / guide style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / bundle style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / references style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / monitor style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / gallery style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / review style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / reports style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / offline style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / settings style parity",
+      "passed": true
+    },
+    {
+      "test": "Responsive 1920px / inventory style parity",
+      "passed": true
+    },
+    {
+      "test": "Accessibility media parity {'reduced_transparency': 'reduce'}",
+      "passed": true
+    },
+    {
+      "test": "Accessibility media parity {'media': 'print'}",
+      "passed": true
+    },
+    {
+      "test": "No-JavaScript gallery fallback",
+      "passed": true
+    },
+    {
+      "test": "No-JavaScript viewer fallback",
+      "passed": true
+    },
+    {
+      "test": "All extracted PNGs decode",
+      "passed": true,
+      "details": [
+        [
+          941,
+          1672
+        ],
+        [
+          941,
+          1672
+        ],
+        [
+          941,
+          1672
+        ],
+        [
+          941,
+          1672
+        ],
+        [
+          941,
+          1672
+        ]
+      ]
+    },
+    {
+      "test": "No application console errors",
+      "passed": true,
+      "details": []
+    },
+    {
+      "test": "No failed application requests",
+      "passed": true,
+      "details": []
+    }
+  ],
+  "comparisons": [
+    {
+      "theme": "dark",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "light",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "aurora-violet",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "arctic-blue",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "lavender-mist",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-orchid",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "obsidian-amethyst",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "carbon-graphite",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "midnight-sapphire",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "dashboard",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "project",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "guide",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "bundle",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "references",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "monitor",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "gallery",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "review",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "reports",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "offline",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "settings",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    },
+    {
+      "theme": "dark-titanium",
+      "page": "inventory",
+      "computed_styles_identical": true,
+      "pixels_identical": true
+    }
+  ],
+  "console_errors": [],
+  "failed_requests": []
+}

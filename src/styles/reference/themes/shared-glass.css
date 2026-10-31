@@ -1,0 +1,231 @@
+/* Original shared glass surfaces and dark/light component appearance, including reduced transparency. */
+
+body {
+  background:
+    radial-gradient(
+      ellipse at 82% 4%,
+      rgba(100, 76, 190, 0.15),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 12% 72%,
+      rgba(57, 105, 183, 0.1),
+      transparent 38%
+    ),
+    var(--color-background);
+}
+
+.sidebar {
+  background: rgba(15, 18, 32, 0.88);
+  border-right-color: rgba(173, 158, 255, 0.18);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+}
+
+.utility-bar {
+  background: rgba(13, 16, 29, 0.78);
+  border-bottom-color: rgba(173, 158, 255, 0.17);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+}
+
+.panel,
+.card,
+.hero,
+.prompt,
+.gallery-card,
+.ref-card,
+.modal-box,
+.viewer-box,
+.project-context,
+.provider-card,
+.guide-body,
+.style-choice,
+.dropzone,
+.report-head,
+.logs,
+.readiness-strip,
+.stats,
+.state-explorer,
+.local-settings {
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.panel,
+.hero,
+.prompt,
+.modal-box,
+.viewer-box,
+.guide-body,
+.report-head {
+  background: linear-gradient(
+    145deg,
+    rgba(42, 40, 69, 0.72),
+    rgba(22, 25, 43, 0.82)
+  );
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+
+.card,
+.gallery-card,
+.ref-card,
+.provider-card,
+.style-choice {
+  background: linear-gradient(
+    145deg,
+    rgba(49, 46, 78, 0.66),
+    rgba(28, 30, 50, 0.82)
+  );
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+}
+
+.project-context,
+.readiness-strip,
+.stats,
+.state-explorer,
+.local-settings {
+  background: rgba(20, 23, 41, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.inset,
+.value-block,
+.logs,
+.search,
+.input,
+.textarea,
+.select,
+.segment,
+.step-tab,
+.theme-option,
+.inventory-list a,
+.dropzone {
+  background-color: rgba(12, 16, 31, 0.72);
+}
+
+.nav a[aria-current="page"] {
+  background: linear-gradient(
+    100deg,
+    rgba(119, 88, 221, 0.28),
+    rgba(119, 88, 221, 0.12)
+  ) !important;
+  color: #c5b5ff !important;
+  box-shadow: inset 0 0 0 1px rgba(183, 164, 255, 0.16);
+}
+
+.nav a[aria-current="page"]:before {
+  background: #a995ff;
+}
+
+.nav a:hover {
+  background: rgba(119, 103, 190, 0.16);
+}
+
+.brandmark {
+  color: #b8a7ff;
+  border-color: rgba(183, 164, 255, 0.3);
+}
+
+.btn.primary,
+.btn.green {
+  background: linear-gradient(135deg, #8061e8, #a18aff);
+  border-color: rgba(204, 190, 255, 0.45);
+  color: #fff;
+  box-shadow:
+    0 5px 18px rgba(107, 78, 215, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.btn.primary:hover {
+  filter: brightness(1.1);
+}
+
+.badge {
+  background: rgba(133, 107, 226, 0.14);
+  border-color: rgba(174, 155, 255, 0.27);
+  color: #c7b8ff;
+}
+
+.active-card {
+  border-color: rgba(174, 155, 255, 0.55);
+  background: rgba(123, 94, 218, 0.14);
+}
+
+.progress span {
+  background: linear-gradient(90deg, #6c8fe8, #a995ff);
+}
+
+.workflow-rail .rail-index {
+  color: #b8a7ff;
+  border-color: rgba(174, 155, 255, 0.3);
+}
+
+.workflow-rail a:hover,
+.subtle-link,
+.prompt-more,
+.mapping-row .mapping-expand {
+  color: #b8a7ff;
+}
+
+.search:focus-within,
+:focus-visible {
+  outline-color: #aa96ff !important;
+}
+
+::selection {
+  background: #8b72e8;
+  color: #fff;
+}
+
+.asset-select input:checked {
+  background: #9c83ff;
+  border-color: #c0b1ff;
+}
+
+.asset-select input:checked:after {
+  color: #171329;
+}
+
+.gallery-photo:after {
+  background: rgba(15, 16, 34, 0.82);
+}
+
+.modal {
+  background: rgba(5, 7, 18, 0.7);
+  backdrop-filter: blur(12px) saturate(130%);
+}
+
+.viewer-arrow {
+  background: rgba(42, 39, 69, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.project-visual,
+.ref-plate {
+  background-color: rgba(15, 18, 34, 0.82);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .sidebar,
+  .utility-bar,
+  .panel,
+  .card,
+  .hero,
+  .prompt,
+  .gallery-card,
+  .ref-card,
+  .modal-box,
+  .viewer-box,
+  .project-context,
+  .provider-card,
+  .guide-body,
+  .style-choice {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-surface);
+  }
+}

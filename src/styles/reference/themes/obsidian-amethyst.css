@@ -1,0 +1,58 @@
+/* obsidian-amethyst original theme tokens, gradients and glass parameters. */
+
+:root[data-theme="obsidian-amethyst"] {
+  color-scheme: dark;
+  --color-background: #07070b;
+  --color-secondary: #100d17;
+  --color-surface: rgba(27, 21, 38, 0.84);
+  --color-card: rgba(36, 28, 50, 0.82);
+  --color-border: rgba(180, 154, 232, 0.21);
+  --color-text: #f3effa;
+  --color-muted: #b8adc8;
+  --color-primary: #b49ae8;
+  --color-primary-soft: rgba(180, 154, 232, 0.14);
+  --color-success: #99cabb;
+  --color-warning: #d8bf97;
+  --color-error: #e1a5b4;
+  --on-primary: #07070b;
+  --inset: rgba(11, 9, 15, 0.88);
+  --hover: rgba(180, 154, 232, 0.16);
+  --shadow-card:
+    0 12px 34px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --shadow-overlay: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --theme-canvas:
+    radial-gradient(ellipse at 84% 2%, rgba(33, 19, 47, 0.36), transparent 43%),
+    radial-gradient(ellipse at 8% 78%, rgba(69, 50, 83, 0.1), transparent 48%),
+    linear-gradient(155deg, #07070b 35%, #100d17 100%);
+  --theme-sidebar: linear-gradient(
+    172deg,
+    rgba(16, 13, 23, 0.94),
+    rgba(7, 7, 11, 0.94)
+  );
+  --theme-utility: rgba(16, 13, 23, 0.87);
+  --theme-panel: linear-gradient(
+    145deg,
+    rgba(27, 21, 38, 0.85),
+    rgba(16, 13, 23, 0.9)
+  );
+  --theme-card: linear-gradient(
+    138deg,
+    rgba(36, 28, 50, 0.82),
+    rgba(27, 21, 38, 0.86)
+  );
+  --theme-context: linear-gradient(
+    160deg,
+    rgba(16, 13, 23, 0.88),
+    rgba(11, 9, 15, 0.88)
+  );
+  --theme-button: linear-gradient(125deg, #b49ae8, #cdc1ee);
+  --theme-button-text: #07070b;
+  --theme-progress: linear-gradient(90deg, #cdc1ee, #b49ae8);
+  --theme-overlay: rgba(7, 7, 11, 0.76);
+  --theme-nav: linear-gradient(
+    105deg,
+    rgba(180, 154, 232, 0.23),
+    rgba(180, 154, 232, 0.07)
+  );
+  --theme-saturation: 135%;
+}

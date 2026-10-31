@@ -1,0 +1,20 @@
+/* Light: consolidated original token overrides. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-background: #f1f0fa;
+  --color-secondary: #e9e7f5;
+  --color-surface: rgba(255, 255, 255, 0.78);
+  --color-card: rgba(247, 245, 255, 0.82);
+  --color-border: rgba(105, 83, 175, 0.2);
+  --color-text: #242039;
+  --color-muted: #625d7d;
+  --color-primary: #684bd1;
+  --color-primary-soft: rgba(116, 86, 211, 0.11);
+  --color-success: #216c59;
+  --color-warning: #815313;
+  --color-error: #a43155;
+  --on-primary: #fff;
+  --inset: rgba(235, 232, 249, 0.86);
+  --hover: rgba(116, 86, 211, 0.1);
+  --shadow-card: 0 10px 28px rgba(52, 39, 105, 0.09);
+}

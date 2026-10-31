@@ -1,0 +1,27 @@
+{
+  "all_passed": true,
+  "server": "Actual bundled VS Code Live Server engine",
+  "source_commit": "4153b4ba737f003804c3d9acbce78ad4fad19b36",
+  "workspace_setting": {
+    "liveServer.settings.useWebExt": true
+  },
+  "engine_option": {
+    "useBrowserExtension": true
+  },
+  "tested": [
+    "HTTP serving",
+    "No injected inline reload script",
+    "ES module initialization",
+    "Sidebar navigation",
+    "Premium theme switching",
+    "Gallery selection",
+    "Selected preview",
+    "Escape closes viewer",
+    "All requested files return successful responses",
+    "No console/CSP/runtime errors"
+  ],
+  "request_count": 36,
+  "console_errors": [],
+  "failed_requests": [],
+  "limitation": "The VS Code graphical UI itself was not launched. Its exact bundled static-server engine and mapped workspace option were exercised. Auto-refresh injection is intentionally disabled; manual refresh works."
+}

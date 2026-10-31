@@ -1,0 +1,202 @@
+/* Shared design tokens and original foundation. Theme colors live in themes/. */
+:root {
+  --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --sidebar-width: 232px;
+  --radius-card: 10px;
+  --radius-modal: 18px;
+  --fast: 140ms;
+  --normal: 220ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --z-shell: 20;
+  --z-overlay: 100;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --text-micro: 10px;
+  --text-small: 12px;
+  --text-body: 14px;
+  --text-section: 21px;
+  --text-page: 36px;
+  --text-hero: 58px;
+  --radius-control: 6px;
+  --radius-panel: 14px;
+  --radius-hero: 18px;
+  --z-utility: 25;
+  --z-selection: 30;
+  --z-backdrop: 35;
+  --z-drawer: 40;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  scroll-padding-top: 80px;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: var(--text-body)/1.6 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+label {
+  touch-action: manipulation;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48 !important;
+  filter: saturate(0.4);
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-page);
+  line-height: 1.15;
+  font-weight: 550;
+  letter-spacing: -1.3px;
+}
+
+h2 {
+  font-size: var(--text-section);
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+  font-weight: 550;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+p {
+  margin-top: 6px;
+  color: var(--color-muted);
+}
+
+small,
+.hint {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+code,
+pre,
+.mono {
+  font-family: var(--mono);
+}
+
+code {
+  font-size: 12px;
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}
+
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+a,
+button {
+  transition:
+    background var(--fast),
+    border-color var(--fast),
+    color var(--fast),
+    transform var(--fast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--on-primary);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  vertical-align: middle;
+}
+
+svg {
+  max-width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 6px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -100px;
+  z-index: 200;
+  background: var(--color-primary);
+  color: var(--on-primary);
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 10px;
+}

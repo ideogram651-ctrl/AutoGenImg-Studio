@@ -184,6 +184,41 @@ export function createApiRouter(
     res.json(list);
   });
 
+  // 4b. Project Preview Image Endpoint
+  router.get('/projects/:id/preview', (req: Request, res: Response) => {
+    const projectId = req.params.id;
+    const allProjects = projectManager.listProjects();
+    const project = allProjects.find((p) => p.id === projectId);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found.' });
+    }
+
+    const loaded = projectManager.loadProjectConfig(project.outputPath);
+    const manifest = loaded.manifest || projectManager.loadManifest(project.outputPath);
+    if (!manifest || !manifest.items) {
+      return res.json({ imageUrl: null, savedCount: 0 });
+    }
+
+    const savedItems = manifest.items
+      .filter((item: any) => item.status === 'SAVED' && item.outputFile)
+      .sort((a: any, b: any) => (a.sequence || 0) - (b.sequence || 0));
+
+    if (savedItems.length === 0) {
+      return res.json({ imageUrl: null, savedCount: 0 });
+    }
+
+    const firstItem = savedItems[0];
+    const filename = path.basename(firstItem.outputFile);
+    const runId = manifest.runId || '';
+    const imageUrl = `/api/images/${projectId}/${encodeURIComponent(filename)}?run=${encodeURIComponent(runId)}`;
+
+    res.json({
+      imageUrl,
+      savedCount: savedItems.length,
+      firstPromptId: firstItem.id,
+    });
+  });
+
   router.get('/projects/active', (req: Request, res: Response) => {
     // If orchestrator already has active project, return it
     let project = orchestrator.getCurrentProject();
@@ -890,8 +925,20 @@ export function createApiRouter(
 
   // Serve individual gallery images safely through the app (no raw filesystem paths exposed).
   router.get('/images/:projectId/:filename', (req: Request, res: Response) => {
-    const currentProject = orchestrator.getCurrentProject();
-    if (!currentProject || currentProject.id !== req.params.projectId) {
+    // Look up project by ID (supports both active and non-active projects for previews)
+    const projectId = req.params.projectId;
+    let project = orchestrator.getCurrentProject();
+    if (!project || project.id !== projectId) {
+      const allProjects = projectManager.listProjects();
+      const found = allProjects.find((p) => p.id === projectId);
+      if (found) {
+        const loaded = projectManager.loadProjectConfig(found.outputPath);
+        if (loaded.project) {
+          project = loaded.project;
+        }
+      }
+    }
+    if (!project || project.id !== projectId) {
       return res.status(403).json({ error: 'Access denied.' });
     }
 
@@ -909,21 +956,21 @@ export function createApiRouter(
 
     // 1. If runId provided, search that specific run's directory FIRST
     if (requestedRunId) {
-      const specificRunDir = path.join(currentProject.outputPath, 'runs', requestedRunId, 'images');
+      const specificRunDir = path.join(project.outputPath, 'runs', requestedRunId, 'images');
       if (fs.existsSync(specificRunDir)) {
         searchDirs.push(specificRunDir);
       }
     }
 
     // 2. Search default output/images
-    const defaultImagesDir = path.join(currentProject.outputPath, 'output', 'images');
+    const defaultImagesDir = path.join(project.outputPath, 'output', 'images');
     if (fs.existsSync(defaultImagesDir)) {
       searchDirs.push(defaultImagesDir);
     }
 
     // 3. Search all run directories (excluding the one already searched)
     try {
-      const runsDir = path.join(currentProject.outputPath, 'runs');
+      const runsDir = path.join(project.outputPath, 'runs');
       if (fs.existsSync(runsDir)) {
         for (const runDir of fs.readdirSync(runsDir)) {
           if (runDir === requestedRunId) continue; // Already searched

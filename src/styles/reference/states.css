@@ -1,0 +1,283 @@
+/* Original no-JavaScript hash/radio states and final source refinements; keep after responsive.css. */
+
+body:has(.page:target) .page.default {
+  display: none;
+}
+
+.page:target {
+  display: block !important;
+}
+
+body:has(#create-project:target, #delete-project:target) .page {
+  display: none !important;
+}
+
+body:has(#create-project:target, #delete-project:target) #dashboard {
+  display: block !important;
+}
+
+body:has(
+    #paste-json:target,
+    #view-json:target,
+    #edit-json:target,
+    #edit-prompt:target
+  )
+  .page {
+  display: none !important;
+}
+
+body:has(
+    #paste-json:target,
+    #view-json:target,
+    #edit-json:target,
+    #edit-prompt:target
+  )
+  #bundle {
+  display: block !important;
+}
+
+body:has(
+    #add-reference-upload:target,
+    #add-reference-text:target,
+    #edit-reference:target
+  )
+  .page {
+  display: none !important;
+}
+
+body:has(
+    #add-reference-upload:target,
+    #add-reference-text:target,
+    #edit-reference:target
+  )
+  #references {
+  display: block !important;
+}
+
+body:has(#regenerate-all:target) .page {
+  display: none !important;
+}
+
+body:has(#regenerate-all:target) #monitor {
+  display: block !important;
+}
+
+body:has(#delete-run:target, #report-preview:target) .page {
+  display: none !important;
+}
+
+body:has(#delete-run:target, #report-preview:target) #reports {
+  display: block !important;
+}
+
+body:has(
+    #viewer-1:target,
+    #viewer-2:target,
+    #viewer-3:target,
+    #viewer-4:target,
+    #viewer-5:target
+  )
+  .page {
+  display: none !important;
+}
+
+body:has(
+    #viewer-1:target,
+    #viewer-2:target,
+    #viewer-3:target,
+    #viewer-4:target,
+    #viewer-5:target
+  )
+  #gallery {
+  display: block !important;
+}
+
+#guide-1:checked ~ .guide-steps label[for="guide-1"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-1:checked ~ .guide-content .guide-body.step-1 {
+  display: block;
+}
+
+#guide-2:checked ~ .guide-steps label[for="guide-2"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-2:checked ~ .guide-content .guide-body.step-2 {
+  display: block;
+}
+
+#guide-3:checked ~ .guide-steps label[for="guide-3"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-3:checked ~ .guide-content .guide-body.step-3 {
+  display: block;
+}
+
+#guide-4:checked ~ .guide-steps label[for="guide-4"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-4:checked ~ .guide-content .guide-body.step-4 {
+  display: block;
+}
+
+#guide-5:checked ~ .guide-steps label[for="guide-5"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-5:checked ~ .guide-content .guide-body.step-5 {
+  display: block;
+}
+
+#guide-6:checked ~ .guide-steps label[for="guide-6"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-6:checked ~ .guide-content .guide-body.step-6 {
+  display: block;
+}
+
+#guide-7:checked ~ .guide-steps label[for="guide-7"] {
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-color: var(--color-primary);
+}
+
+#guide-7:checked ~ .guide-content .guide-body.step-7 {
+  display: block;
+}
+
+h1[tabindex]:focus-visible {
+  outline: none !important;
+}
+
+#references .three:has(> .ref-card) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 960px) {
+  #references .three:has(> .ref-card) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-context {
+  margin-top: 20px;
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.hero-context summary {
+  cursor: pointer;
+}
+
+.hero-context p {
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.hero-context .badge {
+  display: inline-flex !important;
+  margin-top: 12px;
+  font-size: 9px;
+}
+
+.check-display.unchecked:after {
+  content: none;
+}
+
+.check-display.unchecked {
+  background: transparent;
+}
+
+.gallery-caption p {
+  max-width: none !important;
+}
+
+.workflow-rail a[aria-current="step"] {
+  color: var(--color-primary);
+}
+
+.hero-original-title {
+  color: var(--color-text) !important;
+}
+
+.table-wrap .fullprompt {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.state-content {
+  min-width: 0;
+}
+
+.theme-option .swatch {
+  display: block;
+}
+
+#reports .stats .stat:first-child strong {
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+
+.input[tabindex]:focus-visible {
+  outline-offset: 2px;
+}
+
+.viewer-top .btn {
+  font-size: 11px;
+}
+
+.utility-start {
+  min-width: 0;
+}
+
+.utility-start #utility-context {
+  max-width: 440px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .utility-start #utility-context {
+    max-width: 175px;
+    font-size: 10px;
+  }
+  .utility-bar {
+    padding-inline: 10px;
+  }
+  .utility-end {
+    white-space: nowrap;
+  }
+  .panel > .row,
+  .card > .row,
+  .modal-box > .row {
+    flex-wrap: wrap;
+  }
+  .modal-box .input {
+    font-size: 12px;
+  }
+  .gallery-caption .gallery-hover {
+    flex-wrap: wrap;
+  }
+  .hero-context {
+    font-size: 10px;
+  }
+}

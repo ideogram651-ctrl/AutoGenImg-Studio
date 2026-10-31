@@ -12,39 +12,39 @@ export function Header({ onOpenMobileMenu, onOpenNewProjectModal }: HeaderProps)
 
   const pageTitles: Record<string, { title: string; subtitle: string }> = {
     dashboard: {
-      title: 'Dashboard',
-      subtitle: 'Overview of project library, active run progress, and execution status.',
+      title: 'Overview',
+      subtitle: 'Project library, recent activity, and workflow readiness.',
     },
     settings_project: {
-      title: 'Project Settings',
+      title: 'Project setup',
       subtitle: 'Configure local output folder, target AI provider, and video interval parameters.',
     },
     how_to_use: {
-      title: 'How to Use / Guided Workflow',
+      title: 'Getting started',
       subtitle: 'Step-by-step master prompt builder, script preparation, and workflow instructions.',
     },
     bundle: {
-      title: 'Prompt Bundle Manager',
+      title: 'Prompt sequence',
       subtitle: 'Inspect, validate, and sequence structured JSON prompt bundles.',
     },
     references: {
-      title: 'Reference Manager',
+      title: 'Reference library',
       subtitle: 'Organize character, style, and environment references and assign them to prompt IDs.',
     },
     monitor: {
-      title: 'Run Monitor',
+      title: 'Generation monitor',
       subtitle: 'Live visible queue progress, item stages, timestamps, and real-time event logs.',
     },
     review: {
-      title: 'Review Center',
+      title: 'Review center',
       subtitle: 'Resolve ambiguous generations, download exceptions, and deliberate user regenerations.',
     },
     reports: {
-      title: 'Reports & History',
+      title: 'Reports & history',
       subtitle: 'Inspect self-contained offline HTML reports, wall-clock timings, and manifests.',
     },
     settings: {
-      title: 'Application Settings',
+      title: 'Preferences',
       subtitle: 'Theme preferences, default output locations, browser profiles, and diagnostic options.',
     },
   };

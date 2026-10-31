@@ -24,8 +24,6 @@ function MainLayout() {
   const openMobileMenu = useCallback(() => setMobileMenuOpen(true), []);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
-  // Memoize the active page element so it only changes when activePage changes,
-  // not on every queueState or other context update.
   const activePageElement = useMemo(() => {
     switch (activePage) {
       case 'dashboard':
@@ -54,25 +52,22 @@ function MainLayout() {
   }, [activePage, openCreateModal]);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[var(--bg-main)] text-[var(--text-primary)]">
-      {/* Navigation Sidebar */}
+    <div className="app">
       <Sidebar mobileOpen={mobileMenuOpen} onCloseMobile={closeMobileMenu} />
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="viewport">
         <Header
           onOpenMobileMenu={openMobileMenu}
           onOpenNewProjectModal={openCreateModal}
         />
 
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-          <div className="max-w-7xl mx-auto">
+        <main className="page default" id="studio-main">
+          <div className="workspace">
             {activePageElement}
           </div>
         </main>
       </div>
 
-      {/* Modal Dialog */}
       <CreateProjectModal
         isOpen={createModalOpen}
         onClose={closeCreateModal}

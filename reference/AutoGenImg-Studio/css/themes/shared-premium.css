@@ -1,0 +1,284 @@
+/* Original premium component styling, appearance controls and reduced-transparency overrides; shared by eight premium palettes. */
+
+:root[data-premium-theme] body {
+  background: var(--theme-canvas);
+}
+
+:root[data-premium-theme] .sidebar {
+  background: var(--theme-sidebar);
+  border-right-color: var(--color-border);
+  backdrop-filter: blur(22px) saturate(var(--theme-saturation));
+  -webkit-backdrop-filter: blur(22px) saturate(var(--theme-saturation));
+}
+
+:root[data-premium-theme] .utility-bar {
+  background: var(--theme-utility);
+  border-bottom-color: var(--color-border);
+  backdrop-filter: blur(22px) saturate(var(--theme-saturation));
+  -webkit-backdrop-filter: blur(22px) saturate(var(--theme-saturation));
+}
+
+:root[data-premium-theme] .panel,
+:root[data-premium-theme] .hero,
+:root[data-premium-theme] .prompt,
+:root[data-premium-theme] .modal-box,
+:root[data-premium-theme] .viewer-box,
+:root[data-premium-theme] .guide-body,
+:root[data-premium-theme] .report-head {
+  background: var(--theme-panel);
+  border-color: var(--color-border);
+  backdrop-filter: blur(18px) saturate(var(--theme-saturation));
+  -webkit-backdrop-filter: blur(18px) saturate(var(--theme-saturation));
+}
+
+:root[data-premium-theme] .card,
+:root[data-premium-theme] .gallery-card,
+:root[data-premium-theme] .ref-card,
+:root[data-premium-theme] .provider-card,
+:root[data-premium-theme] .style-choice {
+  background: var(--theme-card);
+  border-color: var(--color-border);
+  backdrop-filter: blur(14px) saturate(var(--theme-saturation));
+  -webkit-backdrop-filter: blur(14px) saturate(var(--theme-saturation));
+}
+
+:root[data-premium-theme] .project-context,
+:root[data-premium-theme] .readiness-strip,
+:root[data-premium-theme] .stats,
+:root[data-premium-theme] .state-explorer,
+:root[data-premium-theme] .local-settings {
+  background: var(--theme-context);
+  border-color: var(--color-border);
+}
+
+:root[data-premium-theme] .inset,
+:root[data-premium-theme] .value-block,
+:root[data-premium-theme] .logs,
+:root[data-premium-theme] .search,
+:root[data-premium-theme] .input,
+:root[data-premium-theme] .textarea,
+:root[data-premium-theme] .select,
+:root[data-premium-theme] .segment,
+:root[data-premium-theme] .step-tab,
+:root[data-premium-theme] .theme-option,
+:root[data-premium-theme] .inventory-list a,
+:root[data-premium-theme] .dropzone {
+  background-color: var(--inset);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+:root[data-premium-theme] input,
+:root[data-premium-theme] textarea,
+:root[data-premium-theme] select {
+  accent-color: var(--color-primary);
+}
+
+:root[data-premium-theme] input::placeholder,
+:root[data-premium-theme] textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+:root[data-premium-theme] select option {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+:root[data-premium-theme] .nav a[aria-current="page"] {
+  background: var(--theme-nav) !important;
+  color: var(--color-primary) !important;
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+:root[data-premium-theme] .nav a[aria-current="page"]:before {
+  background: var(--color-primary);
+}
+
+:root[data-premium-theme] .nav a:hover {
+  background: var(--hover);
+  color: var(--color-text);
+}
+
+:root[data-premium-theme] .brandmark,
+:root[data-premium-theme] .workflow-rail .rail-index {
+  color: var(--color-primary);
+  border-color: var(--color-border);
+}
+
+:root[data-premium-theme] .btn.primary,
+:root[data-premium-theme] .btn.green {
+  background: var(--theme-button);
+  border-color: var(--color-primary);
+  color: var(--theme-button-text);
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+:root[data-premium-theme] .btn.primary:not(:disabled):hover,
+:root[data-premium-theme] .btn.green:not(:disabled):hover {
+  background: var(--theme-button);
+  border-color: var(--color-primary);
+  filter: brightness(1.08);
+}
+
+:root[data-premium-theme] .badge {
+  background: var(--color-primary-soft);
+  border-color: var(--color-border);
+  color: var(--color-primary);
+}
+
+:root[data-premium-theme] .badge.green,
+:root[data-premium-theme] .notice.green {
+  color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 9%, transparent);
+  border-color: color-mix(in srgb, var(--color-success) 28%, transparent);
+}
+
+:root[data-premium-theme] .badge.amber,
+:root[data-premium-theme] .notice.amber {
+  color: var(--color-warning);
+  background: color-mix(in srgb, var(--color-warning) 9%, transparent);
+  border-color: color-mix(in srgb, var(--color-warning) 28%, transparent);
+}
+
+:root[data-premium-theme] .badge.red,
+:root[data-premium-theme] .notice.red {
+  color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 9%, transparent);
+  border-color: color-mix(in srgb, var(--color-error) 28%, transparent);
+}
+
+:root[data-premium-theme] .badge.gray {
+  background: var(--inset);
+  color: var(--color-muted);
+  border-color: var(--color-border);
+}
+
+:root[data-premium-theme] .active-card {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+:root[data-premium-theme] .progress span {
+  background: var(--theme-progress);
+}
+
+:root[data-premium-theme] .workflow-rail a:hover,
+:root[data-premium-theme] .subtle-link,
+:root[data-premium-theme] .prompt-more,
+:root[data-premium-theme] .mapping-row .mapping-expand {
+  color: var(--color-primary);
+}
+
+:root[data-premium-theme] .search:focus-within,
+:root[data-premium-theme] :focus-visible {
+  outline-color: var(--color-primary) !important;
+}
+
+:root[data-premium-theme] ::selection {
+  background: var(--color-primary);
+  color: var(--on-primary);
+}
+
+:root[data-premium-theme] .asset-select,
+:root[data-premium-theme] .asset-id {
+  background: var(--inset);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+:root[data-premium-theme] .asset-select input {
+  background: var(--color-secondary);
+  border-color: var(--color-muted);
+}
+
+:root[data-premium-theme] .asset-select input:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+:root[data-premium-theme] .asset-select input:checked:after {
+  color: var(--on-primary);
+}
+
+:root[data-premium-theme] .gallery-photo:after {
+  background: var(--inset);
+  color: var(--color-text);
+}
+
+:root[data-premium-theme] .modal,
+:root[data-premium-theme] .mobile-backdrop {
+  background: var(--theme-overlay);
+}
+
+:root[data-premium-theme] .modal-box,
+:root[data-premium-theme] .viewer-box {
+  box-shadow: var(--shadow-overlay);
+}
+
+:root[data-premium-theme] .viewer-arrow {
+  background: var(--color-card);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+:root[data-premium-theme] .viewer-arrow:hover {
+  background: var(--hover);
+}
+
+:root[data-premium-theme] .project-visual,
+:root[data-premium-theme] .ref-plate {
+  background-color: var(--inset);
+}
+
+.local-settings .segment[aria-label="Local appearance"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.local-settings [data-set-theme] {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.theme-choice-swatch {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  background: var(--theme-swatch);
+}
+
+.local-settings [data-set-theme][aria-pressed="true"] {
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-premium-theme] .sidebar,
+  :root[data-premium-theme] .utility-bar,
+  :root[data-premium-theme] .panel,
+  :root[data-premium-theme] .card,
+  :root[data-premium-theme] .hero,
+  :root[data-premium-theme] .prompt,
+  :root[data-premium-theme] .gallery-card,
+  :root[data-premium-theme] .ref-card,
+  :root[data-premium-theme] .modal-box,
+  :root[data-premium-theme] .viewer-box,
+  :root[data-premium-theme] .project-context,
+  :root[data-premium-theme] .provider-card,
+  :root[data-premium-theme] .guide-body,
+  :root[data-premium-theme] .style-choice,
+  :root[data-premium-theme] .readiness-strip,
+  :root[data-premium-theme] .stats,
+  :root[data-premium-theme] .state-explorer,
+  :root[data-premium-theme] .local-settings {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--color-surface);
+  }
+}

@@ -1,0 +1,390 @@
+/* Application shell, navigation, header and workflow layout. */
+
+.app {
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-width);
+  background: var(--color-secondary);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-shell);
+  transition: width var(--normal) var(--ease);
+  overflow: auto;
+}
+
+.brand {
+  height: 99px;
+  padding: 27px 23px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex: none;
+}
+
+.brandmark {
+  width: 33px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  transform: rotate(-5deg);
+}
+
+.brandmark .icon {
+  width: 23px;
+  height: 23px;
+}
+
+.brand strong {
+  font-size: 17px;
+  letter-spacing: -0.5px;
+  font-weight: 650;
+}
+
+.brand small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.nav {
+  display: grid;
+  padding: 8px 14px;
+  gap: 4px;
+}
+
+.nav-group {
+  font-size: 10px;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  margin: 18px 11px 6px;
+  white-space: nowrap;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 22px;
+  min-height: 44px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav a:hover {
+  background: var(--hover);
+  color: var(--color-text);
+}
+
+.nav a[aria-current="page"] {
+  background: var(--color-primary-soft) !important;
+  color: var(--color-primary) !important;
+}
+
+.nav a[aria-current="page"]:before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  height: 22px;
+  width: 2px;
+  background: var(--color-primary);
+}
+
+.nav a .icon {
+  width: 17px;
+  height: 17px;
+}
+
+.nav .nav-count {
+  margin-left: auto;
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--color-muted);
+}
+
+.inventory-access {
+  margin: 20px 25px;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  padding: 24px 20px 20px;
+}
+
+.project-context {
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--inset);
+  margin-bottom: 14px;
+}
+
+.project-context > small {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.project-context strong {
+  display: block;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.project-context .newlaw > small,
+.project-context .stickman > small {
+  display: block;
+  margin-top: 3px;
+}
+
+.project-context .stickman {
+  display: none;
+}
+
+.theme-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.viewport {
+  margin-left: var(--sidebar-width);
+  min-width: 0;
+  transition: margin-left var(--normal) var(--ease);
+}
+
+.utility-bar {
+  height: 61px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 40px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+  position: sticky;
+  top: 0;
+  z-index: 25;
+}
+
+.utility-start,
+.utility-end {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.utility-start {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.utility-start b {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.utility-slash {
+  color: var(--color-border);
+}
+
+.utility-end {
+  font: 10px var(--mono);
+  letter-spacing: 0.6px;
+  color: var(--color-muted);
+}
+
+.offline-dot {
+  height: 6px;
+  width: 6px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+.shell-toggle {
+  background: transparent;
+  border: 0;
+  padding: 9px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  color: var(--color-muted);
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.shell-toggle:hover {
+  background: var(--hover);
+  color: var(--color-text);
+}
+
+.page {
+  display: none;
+}
+
+.page.default {
+  display: block;
+}
+
+.app-header {
+  padding: 38px 40px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.title-row > .badge {
+  font: 11px var(--mono);
+  padding: 5px 8px;
+}
+
+.app-header p {
+  max-width: 640px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.app-header > .actions {
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: 420px;
+}
+
+.app-header .provider {
+  flex-basis: 100%;
+  justify-content: flex-end;
+  border: 0;
+  padding: 0;
+  margin-bottom: 6px;
+  background: none;
+  font-size: 10px;
+}
+
+.provider {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--color-muted);
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.provider b {
+  font-weight: 500;
+}
+
+.dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--color-muted);
+  border-radius: 50%;
+}
+
+.connected .dot {
+  background: var(--color-success);
+}
+
+.workflow-rail {
+  margin: 0 40px 26px;
+  display: flex;
+  gap: 0;
+  border-block: 1px solid var(--color-border);
+  padding: 13px 0;
+  align-items: center;
+}
+
+.workflow-rail a {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--color-muted);
+  flex: 1;
+  min-width: 0;
+}
+
+.workflow-rail a:hover {
+  color: var(--color-primary);
+}
+
+.workflow-rail .rail-index {
+  font: 10px var(--mono);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.workflow-rail .rail-arrow {
+  margin-left: auto;
+  margin-right: 20px;
+  opacity: 0.5;
+}
+
+.workspace {
+  padding: 0 var(--space-10) var(--space-10);
+  max-width: 1640px;
+  margin: 0 auto;
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.prototype-note {
+  font-size: 11px;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 18px;
+  margin-top: 30px !important;
+  line-height: 1.7;
+}
+
+.prototype-note a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.studio-eyebrow {
+  color: var(--color-primary);
+  font: 10px/1.5 var(--mono);
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 18px;
+}

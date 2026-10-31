@@ -1,0 +1,58 @@
+/* midnight-orchid original theme tokens, gradients and glass parameters. */
+
+:root[data-theme="midnight-orchid"] {
+  color-scheme: dark;
+  --color-background: #160d18;
+  --color-secondary: #231426;
+  --color-surface: rgba(53, 32, 57, 0.84);
+  --color-card: rgba(65, 38, 65, 0.82);
+  --color-border: rgba(221, 160, 231, 0.21);
+  --color-text: #fff0fc;
+  --color-muted: #c9afc9;
+  --color-primary: #dda0e7;
+  --color-primary-soft: rgba(221, 160, 231, 0.14);
+  --color-success: #99cabb;
+  --color-warning: #d8bf97;
+  --color-error: #e1a5b4;
+  --on-primary: #160d18;
+  --inset: rgba(28, 17, 31, 0.88);
+  --hover: rgba(221, 160, 231, 0.16);
+  --shadow-card:
+    0 12px 34px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --shadow-overlay: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --theme-canvas:
+    radial-gradient(ellipse at 84% 2%, rgba(53, 32, 59, 0.36), transparent 43%),
+    radial-gradient(ellipse at 8% 78%, rgba(120, 53, 79, 0.1), transparent 48%),
+    linear-gradient(155deg, #160d18 35%, #231426 100%);
+  --theme-sidebar: linear-gradient(
+    172deg,
+    rgba(35, 20, 38, 0.94),
+    rgba(22, 13, 24, 0.94)
+  );
+  --theme-utility: rgba(35, 20, 38, 0.87);
+  --theme-panel: linear-gradient(
+    145deg,
+    rgba(53, 32, 57, 0.85),
+    rgba(35, 20, 38, 0.9)
+  );
+  --theme-card: linear-gradient(
+    138deg,
+    rgba(65, 38, 65, 0.82),
+    rgba(53, 32, 57, 0.86)
+  );
+  --theme-context: linear-gradient(
+    160deg,
+    rgba(35, 20, 38, 0.88),
+    rgba(28, 17, 31, 0.88)
+  );
+  --theme-button: linear-gradient(125deg, #dda0e7, #e8a6bf);
+  --theme-button-text: #160d18;
+  --theme-progress: linear-gradient(90deg, #e8a6bf, #dda0e7);
+  --theme-overlay: rgba(22, 13, 24, 0.76);
+  --theme-nav: linear-gradient(
+    105deg,
+    rgba(221, 160, 231, 0.23),
+    rgba(221, 160, 231, 0.07)
+  );
+  --theme-saturation: 135%;
+}

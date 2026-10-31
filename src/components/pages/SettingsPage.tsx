@@ -41,7 +41,7 @@ interface ChromeStatusData {
 }
 
 export function SettingsPage() {
-  const { theme, toggleTheme, runtimeStatus, currentProject, refreshState } = useApp();
+  const { theme, toggleTheme, setTheme, runtimeStatus, currentProject, refreshState } = useApp();
 
   // Settings State
   const [defaultOutput, setDefaultOutput] = useState('./project-data');
@@ -578,44 +578,34 @@ export function SettingsPage() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-400">
               1. Theme Appearance
             </h3>
-            <div className="grid grid-cols-2 gap-3 max-w-md">
-              <button
-                type="button"
-                onClick={() => {
-                  if (theme !== 'dark') toggleTheme();
-                }}
-                className={`p-3.5 rounded-xl border flex items-center gap-3 transition-all ${
-                  theme === 'dark'
-                    ? 'border-indigo-500 bg-indigo-500/15 text-white'
-                    : 'border-white/10 hover:border-white/20 text-[var(--text-secondary)]'
-                }`}
-                style={{ backgroundColor: theme === 'dark' ? undefined : 'var(--surface-elevated)' }}
-              >
-                <Moon className="w-5 h-5 text-indigo-400" />
-                <div className="text-left">
-                  <div className="font-bold text-xs" style={{ color: 'var(--text-primary)' }}>Dark Theme</div>
-                  <div className="text-[10px] text-[var(--text-secondary)]">Default deep charcoal</div>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  if (theme !== 'light') toggleTheme();
-                }}
-                className={`p-3.5 rounded-xl border flex items-center gap-3 transition-all ${
-                  theme === 'light'
-                    ? 'border-indigo-500 bg-indigo-500/15 text-indigo-900'
-                    : 'border-white/10 hover:border-white/20 text-[var(--text-secondary)]'
-                }`}
-                style={{ backgroundColor: theme === 'light' ? undefined : 'var(--surface-elevated)' }}
-              >
-                <Sun className="w-5 h-5 text-amber-500" />
-                <div className="text-left">
-                  <div className="font-bold text-xs" style={{ color: 'var(--text-primary)' }}>Light Theme</div>
-                  <div className="text-[10px] text-[var(--text-secondary)]">Clean contrast styling</div>
-                </div>
-              </button>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-3xl">
+              {[
+                { id: 'dark', label: 'Dark', desc: 'Default deep charcoal' },
+                { id: 'light', label: 'Light', desc: 'Clean contrast styling' },
+                { id: 'aurora-violet', label: 'Aurora Violet', desc: 'Violet glass' },
+                { id: 'arctic-blue', label: 'Arctic Blue', desc: 'Cool blue glass' },
+                { id: 'lavender-mist', label: 'Lavender Mist', desc: 'Soft lavender' },
+                { id: 'midnight-orchid', label: 'Midnight Orchid', desc: 'Deep orchid' },
+                { id: 'obsidian-amethyst', label: 'Obsidian Amethyst', desc: 'Dark amethyst' },
+                { id: 'carbon-graphite', label: 'Carbon Graphite', desc: 'Graphite neutral' },
+                { id: 'midnight-sapphire', label: 'Midnight Sapphire', desc: 'Sapphire blue' },
+                { id: 'dark-titanium', label: 'Dark Titanium', desc: 'Titanium metal' },
+              ].map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setTheme(t.id as any)}
+                  className={`p-3 rounded-xl border flex flex-col items-start gap-1 transition-all ${
+                    theme === t.id
+                      ? 'border-indigo-500 bg-indigo-500/15'
+                      : 'border-white/10 hover:border-white/20'
+                  }`}
+                  style={{ backgroundColor: theme === t.id ? undefined : 'var(--surface-elevated)' }}
+                >
+                  <div className="font-bold text-xs" style={{ color: 'var(--text-primary)' }}>{t.label}</div>
+                  <div className="text-[10px] text-[var(--text-secondary)]">{t.desc}</div>
+                </button>
+              ))}
             </div>
           </div>
 

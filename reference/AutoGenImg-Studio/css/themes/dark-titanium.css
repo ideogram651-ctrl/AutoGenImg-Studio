@@ -1,0 +1,58 @@
+/* dark-titanium original theme tokens, gradients and glass parameters. */
+
+:root[data-theme="dark-titanium"] {
+  color-scheme: dark;
+  --color-background: #0e1013;
+  --color-secondary: #191c21;
+  --color-surface: rgba(41, 45, 52, 0.84);
+  --color-card: rgba(53, 58, 67, 0.82);
+  --color-border: rgba(198, 205, 216, 0.21);
+  --color-text: #f0f2f6;
+  --color-muted: #b3bac5;
+  --color-primary: #c6cdd8;
+  --color-primary-soft: rgba(198, 205, 216, 0.14);
+  --color-success: #99cabb;
+  --color-warning: #d8bf97;
+  --color-error: #e1a5b4;
+  --on-primary: #0e1013;
+  --inset: rgba(20, 23, 28, 0.88);
+  --hover: rgba(198, 205, 216, 0.16);
+  --shadow-card:
+    0 12px 34px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --shadow-overlay: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --theme-canvas:
+    radial-gradient(ellipse at 84% 2%, rgba(48, 54, 62, 0.36), transparent 43%),
+    radial-gradient(ellipse at 8% 78%, rgba(74, 73, 89, 0.1), transparent 48%),
+    linear-gradient(155deg, #0e1013 35%, #191c21 100%);
+  --theme-sidebar: linear-gradient(
+    172deg,
+    rgba(25, 28, 33, 0.94),
+    rgba(14, 16, 19, 0.94)
+  );
+  --theme-utility: rgba(25, 28, 33, 0.87);
+  --theme-panel: linear-gradient(
+    145deg,
+    rgba(41, 45, 52, 0.85),
+    rgba(25, 28, 33, 0.9)
+  );
+  --theme-card: linear-gradient(
+    138deg,
+    rgba(53, 58, 67, 0.82),
+    rgba(41, 45, 52, 0.86)
+  );
+  --theme-context: linear-gradient(
+    160deg,
+    rgba(25, 28, 33, 0.88),
+    rgba(20, 23, 28, 0.88)
+  );
+  --theme-button: linear-gradient(125deg, #c6cdd8, #b9b3cc);
+  --theme-button-text: #0e1013;
+  --theme-progress: linear-gradient(90deg, #b9b3cc, #c6cdd8);
+  --theme-overlay: rgba(14, 16, 19, 0.76);
+  --theme-nav: linear-gradient(
+    105deg,
+    rgba(198, 205, 216, 0.23),
+    rgba(198, 205, 216, 0.07)
+  );
+  --theme-saturation: 112%;
+}

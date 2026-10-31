@@ -1,0 +1,30 @@
+{
+  "note": "Losslessly extracted original image bytes; hashes verified against source data URIs.",
+  "assets": [
+    {
+      "path": "assets/artwork/art-1.png",
+      "bytes": 3268086,
+      "sha256": "3695a5ac35cfaadd8ef04c6dd6bc25fb73c8de99d6a79320e4ebf5dc390b0859"
+    },
+    {
+      "path": "assets/artwork/art-2.png",
+      "bytes": 3154887,
+      "sha256": "4252713ea04bd09abe41eb764bc6d8e5e47b2e17b4cfe5a6a2a0d7163ec962d7"
+    },
+    {
+      "path": "assets/artwork/art-3.png",
+      "bytes": 3111626,
+      "sha256": "1db25d46bb0c0814d830fe59b7b6dbb586a3094f75bee794486c6d089c616751"
+    },
+    {
+      "path": "assets/artwork/art-4.png",
+      "bytes": 2956187,
+      "sha256": "9e6eaef8406b423123b7d7cc3faf2455aba4b6b6efcc26b6e84acf2c3ff89cbb"
+    },
+    {
+      "path": "assets/artwork/art-5.png",
+      "bytes": 1823902,
+      "sha256": "895c4b2bfe7571396d78366f4286991f48f2effbe8fba5c111631875cb7c7623"
+    }
+  ]
+}

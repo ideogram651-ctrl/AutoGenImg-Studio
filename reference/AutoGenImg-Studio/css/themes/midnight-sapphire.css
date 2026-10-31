@@ -1,0 +1,58 @@
+/* midnight-sapphire original theme tokens, gradients and glass parameters. */
+
+:root[data-theme="midnight-sapphire"] {
+  color-scheme: dark;
+  --color-background: #070b12;
+  --color-secondary: #0c1522;
+  --color-surface: rgba(18, 32, 52, 0.84);
+  --color-card: rgba(25, 43, 64, 0.82);
+  --color-border: rgba(142, 183, 242, 0.21);
+  --color-text: #edf3fb;
+  --color-muted: #acbdd1;
+  --color-primary: #8eb7f2;
+  --color-primary-soft: rgba(142, 183, 242, 0.14);
+  --color-success: #99cabb;
+  --color-warning: #d8bf97;
+  --color-error: #e1a5b4;
+  --on-primary: #070b12;
+  --inset: rgba(9, 15, 25, 0.88);
+  --hover: rgba(142, 183, 242, 0.16);
+  --shadow-card:
+    0 12px 34px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  --shadow-overlay: 0 28px 90px rgba(0, 0, 0, 0.72);
+  --theme-canvas:
+    radial-gradient(ellipse at 84% 2%, rgba(17, 40, 63, 0.36), transparent 43%),
+    radial-gradient(ellipse at 8% 78%, rgba(40, 71, 99, 0.1), transparent 48%),
+    linear-gradient(155deg, #070b12 35%, #0c1522 100%);
+  --theme-sidebar: linear-gradient(
+    172deg,
+    rgba(12, 21, 34, 0.94),
+    rgba(7, 11, 18, 0.94)
+  );
+  --theme-utility: rgba(12, 21, 34, 0.87);
+  --theme-panel: linear-gradient(
+    145deg,
+    rgba(18, 32, 52, 0.85),
+    rgba(12, 21, 34, 0.9)
+  );
+  --theme-card: linear-gradient(
+    138deg,
+    rgba(25, 43, 64, 0.82),
+    rgba(18, 32, 52, 0.86)
+  );
+  --theme-context: linear-gradient(
+    160deg,
+    rgba(12, 21, 34, 0.88),
+    rgba(9, 15, 25, 0.88)
+  );
+  --theme-button: linear-gradient(125deg, #8eb7f2, #b2d9ec);
+  --theme-button-text: #070b12;
+  --theme-progress: linear-gradient(90deg, #b2d9ec, #8eb7f2);
+  --theme-overlay: rgba(7, 11, 18, 0.76);
+  --theme-nav: linear-gradient(
+    105deg,
+    rgba(142, 183, 242, 0.23),
+    rgba(142, 183, 242, 0.07)
+  );
+  --theme-saturation: 135%;
+}

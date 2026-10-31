@@ -1,0 +1,75 @@
+/* Original reduced-motion and print rules. Focus rules remain at their original cascade positions. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .gallery-card:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+}
+
+@media print {
+  .sidebar,
+  .utility-bar,
+  .app-header > .actions,
+  .workflow-rail,
+  .prototype-note,
+  .modal,
+  .gallery-tools,
+  .selection-tray,
+  .mobile-backdrop {
+    display: none !important;
+  }
+  .viewport {
+    margin: 0 !important;
+  }
+  .page:not(.is-current) {
+    display: none !important;
+  }
+  .page.is-current {
+    display: block !important;
+  }
+  .workspace {
+    padding: 0;
+  }
+  .app-header {
+    padding: 16px 0;
+  }
+  .page .guide-body {
+    display: block !important;
+  }
+  .guide-steps,
+  .guide-footer {
+    display: none;
+  }
+  .table-wrap {
+    overflow: visible;
+  }
+  .table-wrap table {
+    font-size: 8px;
+  }
+  .panel {
+    break-inside: avoid;
+    padding: 16px;
+  }
+  .logs,
+  .activity {
+    max-height: none;
+    overflow: visible;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

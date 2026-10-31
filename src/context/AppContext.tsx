@@ -24,7 +24,17 @@ export type PageId =
   | 'gallery'
   | 'settings';
 
-export type ThemeMode = 'dark' | 'light';
+export type ThemeMode =
+  | 'dark'
+  | 'light'
+  | 'aurora-violet'
+  | 'arctic-blue'
+  | 'lavender-mist'
+  | 'midnight-orchid'
+  | 'obsidian-amethyst'
+  | 'carbon-graphite'
+  | 'midnight-sapphire'
+  | 'dark-titanium';
 
 interface RuntimeStatus {
   platform: string;
@@ -60,6 +70,7 @@ interface AppContextValue {
   setActivePage: (page: PageId) => void;
   theme: ThemeMode;
   toggleTheme: () => void;
+  setTheme: (theme: ThemeMode) => void;
   currentProject: ProjectConfig | null;
   currentBundle: PromptBundle | null;
   currentReferences: ReferenceFile[];
@@ -178,12 +189,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSaveStatus({ kind: 'idle' });
   };
 
-  // Apply theme class to document body
+const PREMIUM_THEMES = new Set([
+  'aurora-violet', 'arctic-blue', 'lavender-mist', 'midnight-orchid',
+  'obsidian-amethyst', 'carbon-graphite', 'midnight-sapphire', 'dark-titanium',
+]);
+
+  // Apply theme via data-theme attribute (reference uses :root[data-theme="..."])
   useEffect(() => {
-    document.documentElement.classList.remove('dark', 'light');
-    document.documentElement.classList.add(theme);
+    const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    if (PREMIUM_THEMES.has(theme)) {
+      root.setAttribute('data-premium-theme', '');
+    } else {
+      root.removeAttribute('data-premium-theme');
+    }
     localStorage.setItem('autogenimg_theme', theme);
   }, [theme]);
+
+  const setThemeMode = (newTheme: ThemeMode) => {
+    setTheme(newTheme);
+  };
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -773,6 +798,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setActivePage: setActivePageWithPersistence,
         theme,
         toggleTheme,
+        setTheme: setThemeMode,
         currentProject,
         currentBundle,
         currentReferences,

@@ -1,0 +1,303 @@
+{
+  "all_passed": true,
+  "test_count": 67,
+  "tests": [
+    {
+      "test": "Complete original body tag sequence and attributes preserved",
+      "passed": true
+    },
+    {
+      "test": "Complete original nonempty body text preserved",
+      "passed": true
+    },
+    {
+      "test": "All 199 inline SVG icons preserved exactly",
+      "passed": true,
+      "detail": 199
+    },
+    {
+      "test": "No inline application stylesheets or scripts",
+      "passed": true
+    },
+    {
+      "test": "No remaining embedded Base64 image payloads",
+      "passed": true
+    },
+    {
+      "test": "Every HTML local reference and hash target resolves",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "test": "No duplicate HTML IDs",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/context.js",
+      "passed": true
+    },
+    {
+      "test": "Named export createContext",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/modal-manager.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initModalManager",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/navigation.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initNavigation",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/theme-manager.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initThemeManager",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/search.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initSearch",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/gallery.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initGallery",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/ui-interactions.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initUIInteractions",
+      "passed": true
+    },
+    {
+      "test": "Module import js/main.js -> ./modules/accessibility.js",
+      "passed": true
+    },
+    {
+      "test": "Named export initAccessibility",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/components.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/states.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/no-script.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/accessibility.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/workspaces.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/layout.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/base.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/responsive.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/artwork.css",
+      "passed": true
+    },
+    {
+      "test": "CSS asset ../assets/artwork/art-1.png",
+      "passed": true
+    },
+    {
+      "test": "CSS asset ../assets/artwork/art-2.png",
+      "passed": true
+    },
+    {
+      "test": "CSS asset ../assets/artwork/art-3.png",
+      "passed": true
+    },
+    {
+      "test": "CSS asset ../assets/artwork/art-4.png",
+      "passed": true
+    },
+    {
+      "test": "CSS asset ../assets/artwork/art-5.png",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/overlays.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/carbon-graphite.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/shared-premium.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/shared-glass.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/midnight-orchid.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/midnight-sapphire.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/dark.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/obsidian-amethyst.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/light.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/dark-titanium.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/aurora-violet.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/arctic-blue.css",
+      "passed": true
+    },
+    {
+      "test": "CSS syntax css/themes/lavender-mist.css",
+      "passed": true
+    },
+    {
+      "test": "Artwork 1 exact decoded source bytes",
+      "passed": true
+    },
+    {
+      "test": "Artwork 2 exact decoded source bytes",
+      "passed": true
+    },
+    {
+      "test": "Artwork 3 exact decoded source bytes",
+      "passed": true
+    },
+    {
+      "test": "Artwork 4 exact decoded source bytes",
+      "passed": true
+    },
+    {
+      "test": "Artwork 5 exact decoded source bytes",
+      "passed": true
+    },
+    {
+      "test": "CSP blocks connections, eval and inline scripts",
+      "passed": true
+    },
+    {
+      "test": "No external telemetry scripts",
+      "passed": true
+    },
+    {
+      "test": "No application dependency manifest, bundler or node_modules",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/main.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/ui-interactions.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/gallery.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/navigation.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/context.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/accessibility.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/modal-manager.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/search.js",
+      "passed": true
+    },
+    {
+      "test": "Native module syntax js/modules/theme-manager.js",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/artwork/art-1.png",
+      "sha256": "3695a5ac35cfaadd8ef04c6dd6bc25fb73c8de99d6a79320e4ebf5dc390b0859",
+      "bytes": 3268086
+    },
+    {
+      "path": "assets/artwork/art-2.png",
+      "sha256": "4252713ea04bd09abe41eb764bc6d8e5e47b2e17b4cfe5a6a2a0d7163ec962d7",
+      "bytes": 3154887
+    },
+    {
+      "path": "assets/artwork/art-3.png",
+      "sha256": "1db25d46bb0c0814d830fe59b7b6dbb586a3094f75bee794486c6d089c616751",
+      "bytes": 3111626
+    },
+    {
+      "path": "assets/artwork/art-4.png",
+      "sha256": "9e6eaef8406b423123b7d7cc3faf2455aba4b6b6efcc26b6e84acf2c3ff89cbb",
+      "bytes": 2956187
+    },
+    {
+      "path": "assets/artwork/art-5.png",
+      "sha256": "895c4b2bfe7571396d78366f4286991f48f2effbe8fba5c111631875cb7c7623",
+      "bytes": 1823902
+    }
+  ]
+}

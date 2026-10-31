@@ -1,0 +1,166 @@
+/* Original dialogs, viewers, live region and local settings. */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #080b09b8;
+  backdrop-filter: blur(8px);
+  z-index: var(--z-overlay);
+  padding: 32px;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.modal:target {
+  display: flex;
+}
+
+.modal-box {
+  width: min(680px, 100%);
+  padding: 30px;
+  max-height: calc(100dvh - 64px);
+  overflow: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-overlay);
+}
+
+.modal-box.wide {
+  width: min(1050px, 100%);
+}
+
+.modal-box.narrow {
+  width: min(500px, 100%);
+}
+
+.modal-heading {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.modal-heading h3 {
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+}
+
+.modal-heading p {
+  font-size: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+.viewer-box {
+  width: min(1100px, 100%);
+  max-height: calc(100dvh - 64px);
+  overflow: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+}
+
+.viewer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.viewer-picture {
+  height: 66vh;
+  max-height: 760px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--inset);
+  border-radius: 7px;
+}
+
+.viewer-caption {
+  font-size: 12px;
+  color: var(--color-muted);
+  margin-top: 15px;
+  line-height: 1.9;
+}
+
+.viewer-caption .fullprompt {
+  max-height: 150px;
+  overflow: auto;
+  margin-top: 12px;
+}
+
+.viewer-arrow {
+  position: absolute;
+  top: 45%;
+  height: 42px;
+  width: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 24px;
+  z-index: 1;
+}
+
+.viewer-arrow.prev {
+  left: 30px;
+}
+
+.viewer-arrow.next {
+  right: 30px;
+}
+
+.viewer-arrow:hover {
+  background: var(--hover);
+}
+
+body.has-overlay {
+  overflow: hidden;
+}
+
+.mobile-backdrop {
+  display: none;
+}
+
+.ui-announcer {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.local-settings {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--inset);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.local-settings p {
+  font-size: 12px;
+  margin-bottom: 12px;
+}

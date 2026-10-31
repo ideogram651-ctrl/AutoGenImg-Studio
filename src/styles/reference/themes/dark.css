@@ -1,0 +1,23 @@
+/* Dark: effective original defaults, including blue/violet glass palette. :root also supplies inherited defaults. */
+
+:root {
+  color-scheme: dark;
+  --color-background: #0b0d16;
+  --color-secondary: #111421;
+  --color-surface: rgba(25, 27, 44, 0.78);
+  --color-card: rgba(34, 35, 57, 0.76);
+  --color-border: rgba(174, 160, 255, 0.19);
+  --color-text: #f4f1ff;
+  --color-muted: #b1b0cc;
+  --color-primary: #a995ff;
+  --color-primary-soft: rgba(139, 111, 255, 0.16);
+  --color-success: #83d9c2;
+  --color-warning: #f0c17d;
+  --color-error: #f39bba;
+  --on-primary: #171329;
+  --inset: rgba(12, 15, 29, 0.78);
+  --hover: rgba(112, 91, 190, 0.22);
+  --shadow-card:
+    0 12px 34px rgba(3, 5, 18, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  --shadow-overlay: 0 28px 90px rgba(2, 3, 14, 0.68);
+}
