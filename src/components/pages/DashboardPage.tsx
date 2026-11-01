@@ -160,7 +160,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
           <span>
             {saveStatus.kind === 'saving' ? 'Saving…' : saveStatus.kind === 'saved' ? 'Saved' : 'Save failed'}
           </span>
-          {saveStatus.message && <span className="truncate max-w-xs">{saveStatus.message}</span>}
+          {saveStatus.message && <span className="muted" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '200px', display: 'block' }}>{saveStatus.message}</span>}
         </div>
       )}
 
@@ -169,7 +169,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
           className="notice"
         >
           <span>{importFeedback}</span>
-          <button onClick={() => setImportFeedback(null)} className="text-xs opacity-70 hover:opacity-100">
+          <button onClick={() => setImportFeedback(null)} className="btn quiet icon-only" style={{ fontSize: '10px', opacity: 0.7 }}>
             Dismiss
           </button>
         </div>

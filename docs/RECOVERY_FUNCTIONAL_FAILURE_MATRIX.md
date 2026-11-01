@@ -10,11 +10,11 @@
 | Project Setup | Project configuration, save | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
 | Prompt Sequence | Import, edit, validate, save | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
 | Reference Library | Upload, add, remove references | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
-| Generation Monitor | Start, pause, resume, stop queue | Renders but wrong layout/colors | HEAVILY Tailwind throughout | Full migration to reference CSS |
-| Gallery | Load images, filter, search, viewer | Renders but wrong layout/colors | HEAVILY Tailwind throughout | Full migration to reference CSS |
-| Review Center | Review, accept/reject, recovery | Renders but wrong layout/colors | HEAVILY Tailwind throughout | Full migration to reference CSS |
-| Reports & History | Load runs, open report | Renders but wrong layout/colors | HEAVILY Tailwind throughout | Full migration to reference CSS |
-| Preferences | Change theme, settings | Renders but wrong layout/colors | HEAVILY Tailwind throughout | Full migration to reference CSS |
+| Generation Monitor | Start, pause, resume, stop queue | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
+| Gallery | Load images, filter, search, viewer | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
+| Review Center | Review, accept/reject, recovery | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
+| Reports & History | Load runs, open report | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
+| Preferences | Change theme, settings | Migrated to reference CSS | Was HEAVILY Tailwind | **MIGRATED** - uses reference classes |
 
 ### Status
 - All backend functionality verified working (162/162 tests pass, production build succeeds)

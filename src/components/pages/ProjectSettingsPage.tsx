@@ -273,7 +273,7 @@ export function ProjectSettingsPage() {
               <p className="hint">
                 Formula: <code>Math.ceil({durationSecs}s / {intervalSecs}s) = {calculatedCount} images</code>.
                 {!isDivisible && (
-                  <span className="text-warning ml-1">
+                  <span className="muted amber-text" style={{ marginLeft: '4px', fontSize: '10px' }}>
                     Note: {durationSecs}s is not evenly divisible by {intervalSecs}s; the final interval will cover the remaining {durationSecs % intervalSecs}s.
                   </span>
                 )}
