@@ -81,7 +81,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
   };
 
   return (
-    <div className="space-y-6">
+    <div className="stack">
       {/* Hero Welcome Banner */}
       <section className="panel hero">
         <div className="hero-copy">

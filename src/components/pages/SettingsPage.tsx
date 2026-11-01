@@ -372,8 +372,8 @@ export function SettingsPage() {
   const readinessBadge = getReadinessBadge();
 
   return (
-    <div className="max-w-4xl space-y-6">
-      <div className="p-6 rounded-xl glass-panel space-y-6" style={{ borderColor: 'var(--surface-border)' }}>
+    <div className="stack">
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Settings className="w-5 h-5 text-indigo-400" />
@@ -572,7 +572,7 @@ export function SettingsPage() {
         </div>
 
         {/* Form Settings */}
-        <form onSubmit={handleSaveSettings} className="space-y-6 text-xs">
+        <form onSubmit={handleSaveSettings} className="stack">
           {/* Theme Preference */}
           <div className="space-y-3">
             <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-400">

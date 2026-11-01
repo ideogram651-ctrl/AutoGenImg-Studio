@@ -115,7 +115,7 @@ export function RunMonitorPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="stack">
       {/* Blocked Auth Banner */}
       {isBlockedAuth && (
         <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex flex-wrap items-center justify-between gap-3 text-xs">
@@ -154,7 +154,7 @@ export function RunMonitorPage() {
       )}
 
       {/* Main Execution Card */}
-      <div className="p-6 rounded-xl glass-panel space-y-6" style={{ borderColor: 'var(--surface-border)' }}>
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -411,7 +411,7 @@ export function RunMonitorPage() {
       </div>
 
       {/* Live Event Stream Terminal Console */}
-      <div className="p-6 rounded-xl glass-panel space-y-3" style={{ borderColor: 'var(--surface-border)' }}>
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-indigo-400" />
@@ -467,7 +467,7 @@ export function RunMonitorPage() {
       {/* Regenerate All Confirmation Modal */}
       {showRegenConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-md p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
+          <div className="modal-box" style={{ borderColor: 'var(--surface-border)' }}>
             <div className="flex items-center gap-3 text-amber-400">
               <RefreshCw className="w-5 h-5 shrink-0" />
               <h3 className="text-base font-bold text-white">Regenerate All Images?</h3>

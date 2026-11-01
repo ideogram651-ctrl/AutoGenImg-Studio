@@ -20,9 +20,9 @@ export function ReviewCenterPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="stack">
       {/* Header */}
-      <div className="p-6 rounded-xl glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">

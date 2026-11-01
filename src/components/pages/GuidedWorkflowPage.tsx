@@ -85,9 +85,9 @@ Ensure all ${calculatedImages} prompts are generated. Return only valid JSON or 
   ];
 
   return (
-    <div className="max-w-5xl space-y-6">
+    <div className="stack">
       {/* Guide Header */}
-      <div className="p-6 rounded-xl glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -146,7 +146,7 @@ Ensure all ${calculatedImages} prompts are generated. Return only valid JSON or 
       </div>
 
       {/* Step Content */}
-      <div className="p-6 rounded-xl glass-panel space-y-6" style={{ borderColor: 'var(--surface-border)' }}>
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         {/* Step 1: Prepare Script */}
         {currentStep === 1 && (
           <div className="space-y-4">

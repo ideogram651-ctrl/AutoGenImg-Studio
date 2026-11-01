@@ -85,57 +85,46 @@ export function ProjectSettingsPage() {
   };
 
   return (
-    <div className="max-w-4xl space-y-6">
-      <div className="p-6 rounded-xl glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
-        <div className="flex items-center gap-2 mb-2">
-          <Sliders className="w-5 h-5 text-indigo-400" />
-          <h2 className="text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-            Project Configuration & Preflight
-          </h2>
+    <div className="stack">
+      <div className="panel">
+        <div className="heading">
+          <div>
+            <h2>Project Configuration &amp; Preflight</h2>
+            <p>Set up output directories, real AI browser provider, conversation URL, and video interval rules before initiating queue processing.</p>
+          </div>
+          <div className="actions">
+            <Sliders className="icon" aria-hidden="true" />
+          </div>
         </div>
-        <p className="text-xs text-[var(--text-secondary)] mb-6">
-          Set up output directories, real AI browser provider, conversation URL, and video interval rules before initiating queue processing.
-        </p>
 
         {message && (
-          <div
-            className={`p-3.5 rounded-lg text-xs font-medium flex items-center gap-2 mb-6 ${
-              message.type === 'success'
-                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
-            }`}
-          >
-            {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertTriangle className="w-4 h-4 shrink-0" />}
+          <div className={`notice ${message.type === 'success' ? 'green' : 'red'}`}>
+            {message.type === 'success' ? <CheckCircle2 className="icon" aria-hidden="true" /> : <AlertTriangle className="icon" aria-hidden="true" />}
             <span>{message.text}</span>
           </div>
         )}
 
-        <form onSubmit={handleSave} className="space-y-6">
+        <form onSubmit={handleSave} className="stack">
           {/* Section 1: Project Identity & Location */}
           <div className="space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-400">
-              1. Project Identity & Output Location
+            <h3 className="section-title">
+              1. Project Identity &amp; Output Location
             </h3>
 
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                Project Name *
-              </label>
+            <div className="field">
+              <div className="label">Project Name *</div>
               <input
                 type="text"
                 required
+                className="input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. YouTube Video - SciFi Short"
-                className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none focus:ring-1 focus:ring-indigo-500"
-                style={{ color: 'var(--text-primary)' }}
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                Authoritative Output Folder Path *
-              </label>
+            <div className="field">
+              <div className="label">Authoritative Output Folder Path *</div>
               <div className="relative">
                 <input
                   type="text"
@@ -144,34 +133,33 @@ export function ProjectSettingsPage() {
                   value={outputPath}
                   onChange={(e) => setOutputPath(e.target.value)}
                   placeholder="e.g. ./project-data/my-project or C:\Users\Username\Videos\ProjectOutput"
-                  className="w-full pl-9 pr-3 py-2 rounded-lg text-xs glass-card outline-none font-mono focus:ring-1 focus:ring-indigo-500"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="input pl-9"
                 />
-                <Folder className="w-4 h-4 text-[var(--text-secondary)] absolute left-3 top-2.5" />
+                <Folder className="icon" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} aria-hidden="true" />
                 <datalist id="suggested-output-paths">
                   {(suggestions?.outputPaths || []).map((p, idx) => (
                     <option key={idx} value={p} />
                   ))}
                 </datalist>
               </div>
-              <p className="text-[11px] text-[var(--text-secondary)] mt-1">
+              <p className="hint">
                 The application creates isolated <code>runs/&lt;run-id&gt;/images/</code>, <code>output/images/</code>, and <code>manifest.json</code> inside this location.
               </p>
             </div>
           </div>
 
           {/* Section 2: AI Provider & Conversation URL */}
-          <div className="space-y-4 pt-4 border-t" style={{ borderColor: 'var(--surface-border)' }}>
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-400">
-                2. AI Provider & Conversation Target (Production)
+          <div className="space-y-4">
+            <div className="row between">
+              <h3 className="section-title">
+                2. AI Provider &amp; Conversation Target (Production)
               </h3>
-              <span className="text-[10px] text-emerald-400 flex items-center gap-1 font-mono">
-                <ShieldCheck className="w-3 h-3" /> Dedicated Chrome CDP Profile
+              <span className="badge green">
+                <ShieldCheck className="icon" aria-hidden="true" /> Dedicated Chrome CDP Profile
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="three">
               {[
                 {
                   id: 'chatgpt',
@@ -195,40 +183,21 @@ export function ProjectSettingsPage() {
                 <div
                   key={prov.id}
                   onClick={() => setProvider(prov.id as ProviderType)}
-                  className={`p-3.5 rounded-lg cursor-pointer border transition-all ${
-                    provider === prov.id
-                      ? 'border-indigo-500 bg-indigo-500/10 shadow-sm'
-                      : 'border-white/10 hover:border-white/20'
-                  }`}
-                  style={{ backgroundColor: provider === prov.id ? undefined : 'var(--surface-elevated)' }}
+                  className={`provider-card${provider === prov.id ? ' selected' : ''}`}
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-semibold text-xs" style={{ color: 'var(--text-primary)' }}>
-                      {prov.title}
-                    </span>
-                    <span
-                      className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${
-                        prov.id === 'chatgpt'
-                          ? 'bg-emerald-500/20 text-emerald-400'
-                          : prov.id === 'gemini'
-                          ? 'bg-blue-500/20 text-blue-400'
-                          : 'bg-amber-500/20 text-amber-400'
-                      }`}
-                    >
-                      {prov.badge}
-                    </span>
+                  <div className="row between">
+                    <span className="indigo-text">{prov.title}</span>
+                    <span className="badge">{prov.badge}</span>
                   </div>
-                  <div className="text-[11px] text-[var(--text-secondary)] leading-relaxed">
+                  <p className="muted">
                     {prov.desc}
-                  </div>
+                  </p>
                 </div>
               ))}
             </div>
 
             <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                Target Conversation URL *
-              </label>
+              <div className="label">Target Conversation URL *</div>
               <input
                 type="url"
                 required
@@ -236,66 +205,56 @@ export function ProjectSettingsPage() {
                 value={conversationUrl}
                 onChange={(e) => setConversationUrl(e.target.value)}
                 placeholder="https://chatgpt.com/c/xxxx or https://gemini.google.com/app/xxxx"
-                className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none font-mono focus:ring-1 focus:ring-indigo-500"
-                style={{ color: 'var(--text-primary)' }}
+                className="input"
               />
               <datalist id="suggested-conversation-urls">
                 {(suggestions?.conversationUrls || []).map((u, idx) => (
                   <option key={idx} value={u} />
                 ))}
               </datalist>
-              <p className="text-[11px] text-[var(--text-secondary)] mt-1">
+              <p className="hint">
                 Point this to your existing authenticated chat session in the automated Chrome browser.
               </p>
             </div>
           </div>
 
           {/* Section 3: Video Plan & Visual Spec */}
-          <div className="space-y-4 pt-4 border-t" style={{ borderColor: 'var(--surface-border)' }}>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-400">
-              3. Timing, Interval & Image Count Calculation
+          <div className="space-y-4">
+            <h3 className="section-title">
+              3. Timing, Interval &amp; Image Count Calculation
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                  Video Duration (Seconds)
-                </label>
+            <div className="three">
+              <div className="field">
+                <div className="label">Video Duration (Seconds)</div>
                 <input
                   type="number"
                   min="5"
                   max="3600"
                   value={durationSecs}
                   onChange={(e) => setDurationSecs(parseInt(e.target.value, 10) || 0)}
-                  className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none focus:ring-1 focus:ring-indigo-500"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="input"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                  Image Interval (Seconds)
-                </label>
+              <div className="field">
+                <div className="label">Image Interval (Seconds)</div>
                 <input
                   type="number"
                   min="1"
                   max="60"
                   value={intervalSecs}
                   onChange={(e) => setIntervalSecs(parseInt(e.target.value, 10) || 1)}
-                  className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none focus:ring-1 focus:ring-indigo-500"
-                  style={{ color: 'var(--text-primary)' }}
+                  className="input"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                  Aspect Ratio
-                </label>
+              <div className="field">
+                <div className="label">Aspect Ratio</div>
                 <select
                   value={aspectRatio}
                   onChange={(e) => setAspectRatio(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none focus:ring-1 focus:ring-indigo-500"
-                  style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-secondary)' }}
+                  className="select input"
                 >
                   <option value="16:9">16:9 (Landscape YouTube)</option>
                   <option value="9:16">9:16 (Vertical Shorts/Reels)</option>
@@ -307,74 +266,53 @@ export function ProjectSettingsPage() {
             </div>
 
             {/* Calculated Preview Box */}
-            <div className="p-3.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-xs">
-              <div className="flex items-center justify-between font-semibold text-indigo-300 mb-1">
-                <span>Calculated Plan: {calculatedCount} Total Images</span>
-                <span>Aspect Ratio: {aspectRatio}</span>
-              </div>
-              <p className="text-[11px] text-[var(--text-secondary)]">
+            <div className="notice indigo">
+              <span className="font-semibold text-indigo-300 mb-1">
+                Calculated Plan: {calculatedCount} Total Images &bull; Aspect Ratio: {aspectRatio}
+              </span>
+              <p className="hint">
                 Formula: <code>Math.ceil({durationSecs}s / {intervalSecs}s) = {calculatedCount} images</code>.
                 {!isDivisible && (
-                  <span className="text-amber-400 ml-1">
+                  <span className="text-warning ml-1">
                     Note: {durationSecs}s is not evenly divisible by {intervalSecs}s; the final interval will cover the remaining {durationSecs % intervalSecs}s.
                   </span>
                 )}
               </p>
             </div>
 
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                Visual Style Description
-              </label>
+            <div className="field">
+              <div className="label">Visual Style Description</div>
               <textarea
                 rows={2}
                 value={styleDescription}
                 onChange={(e) => setStyleDescription(e.target.value)}
                 placeholder="e.g. Cinematic 35mm anamorphic, volumetric neon mist, moody chiaroscuro lighting"
-                className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none focus:ring-1 focus:ring-indigo-500"
-                style={{ color: 'var(--text-primary)' }}
+                className="textarea"
               />
               {(suggestions?.styleDescriptions || []).length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mt-1.5">
-                  <span className="text-[10px] text-[var(--text-secondary)]">Recent:</span>
+                <div className="chips">
+                  <small>Recent:</small>
                   {(suggestions?.styleDescriptions || []).slice(0, 3).map((sd, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setStyleDescription(sd)}
-                      className="text-[10px] px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] truncate max-w-xs"
-                    >
-                      {sd}
-                    </button>
+                    <span key={i}>{sd}</span>
                   ))}
                 </div>
               )}
             </div>
 
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-                Consistency & Character Instructions
-              </label>
+            <div className="field">
+              <div className="label">Consistency & Character Instructions</div>
               <textarea
                 rows={2}
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
                 placeholder="e.g. Ensure Detective Kane wears the same weathered trenchcoat and cybernetic left eye in all scenes."
-                className="w-full px-3 py-2 rounded-lg text-xs glass-card outline-none focus:ring-1 focus:ring-indigo-500"
-                style={{ color: 'var(--text-primary)' }}
+                className="textarea"
               />
               {(suggestions?.instructions || []).length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mt-1.5">
-                  <span className="text-[10px] text-[var(--text-secondary)]">Recent:</span>
+                <div className="chips">
+                  <small>Recent:</small>
                   {(suggestions?.instructions || []).slice(0, 3).map((ins, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() => setInstructions(ins)}
-                      className="text-[10px] px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] truncate max-w-xs"
-                    >
-                      {ins}
-                    </button>
+                    <span key={i}>{ins}</span>
                   ))}
                 </div>
               )}
@@ -382,31 +320,24 @@ export function ProjectSettingsPage() {
           </div>
 
           {/* Form Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-6 border-t" style={{ borderColor: 'var(--surface-border)' }}>
+          <div className="actions">
             <button
               type="submit"
               disabled={saving}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all disabled:opacity-50"
+              className="btn primary"
             >
-              <Save className="w-4 h-4" />
-              <span>{saving ? 'Validating & Saving...' : 'Save Settings'}</span>
+              <Save className="icon" />
+              <span>{saving ? 'Validating &amp; Saving...' : 'Save Settings'}</span>
             </button>
 
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActivePage('bundle')}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium hover:bg-white/10 transition-colors"
-                style={{
-                  backgroundColor: 'var(--surface-elevated)',
-                  border: '1px solid var(--surface-border)',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                <span>Continue to Bundle</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setActivePage('bundle')}
+              className="btn"
+            >
+              <span>Continue to Bundle</span>
+              <ArrowRight className="icon" />
+            </button>
           </div>
         </form>
       </div>

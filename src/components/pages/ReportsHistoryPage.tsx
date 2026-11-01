@@ -62,9 +62,9 @@ export function ReportsHistoryPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="stack">
       {/* Header */}
-      <div className="p-6 rounded-xl glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
+      <div className="panel" style={{ borderColor: 'var(--surface-border)' }}>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -239,7 +239,7 @@ export function ReportsHistoryPage() {
 
       {/* Manifest Items Table */}
       {manifest && (
-        <div className="p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
+        <div className="panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
               Per-Prompt Execution Manifest & Verification Hashes
@@ -379,7 +379,7 @@ export function ReportsHistoryPage() {
       {/* Delete Run Confirmation Modal */}
       {runToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-md p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
+          <div className="modal-box" style={{ borderColor: 'var(--surface-border)' }}>
             <div className="flex items-center gap-3 text-rose-400">
               <Trash2 className="w-5 h-5 shrink-0" />
               <h3 className="text-base font-bold text-white">Delete Run Artifacts?</h3>

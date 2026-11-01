@@ -1,26 +1,8 @@
 import React, { useState } from 'react';
 import {
-  Images,
-  Plus,
-  Trash2,
-  CheckCircle2,
-  Tag,
-  Layers,
-  ArrowRight,
-  Sparkles,
-  Info,
-  AlertTriangle,
-  FileText,
-  FileImage,
-  UploadCloud,
-  File,
-  Hash,
-  Edit2,
-  Save,
-  X,
-  RotateCcw,
-  Upload,
-  RefreshCw,
+  Images, Plus, Trash2, CheckCircle2, Tag, Layers, ArrowRight,
+  Sparkles, Info, AlertTriangle, FileText, FileImage, UploadCloud,
+  File, Hash, Edit2, Save, X, RotateCcw, Upload, RefreshCw,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext.tsx';
 import { ReferenceFile, ReferenceCategory } from '../../types/index.ts';
@@ -89,7 +71,6 @@ export function ReferenceManagerPage() {
       .map((s) => s.trim())
       .filter(Boolean);
 
-    // Write Text: create a text reference from inline content
     if (entryMethod === 'write') {
       if (!textContent.trim()) {
         setModalError('Please enter some text content.');
@@ -114,13 +95,11 @@ export function ReferenceManagerPage() {
       return;
     }
 
-    // Upload Media: unified file input for all supported formats
     if (!selectedFile) {
       setModalError('Please choose a file to upload.');
       return;
     }
 
-    // Enforce max reference count (P-001: max 20 unique active references)
     const maxRefs = referenceCount?.max || 20;
     if (currentReferences.length >= maxRefs) {
       setModalError(`Maximum ${maxRefs} references reached. Remove an existing reference before adding a new one.`);
@@ -181,7 +160,6 @@ export function ReferenceManagerPage() {
       return;
     }
 
-    // Check for duplicate ID (excluding self)
     const duplicate = currentReferences.some(
       (r) => r.id === cleanId && r.id !== editingRefId
     );
@@ -190,742 +168,452 @@ export function ReferenceManagerPage() {
       return;
     }
 
-    // Handle file replacement if a new file was selected
     if (editRefData.file) {
       const fileName = editRefData.file.name;
-      // Read file as base64 and upload via existing API
+      // Read file and upload via existing API
       try {
-        const reader = new FileReader();
-        reader.onload = async (event) => {
-          try {
-            const base64 = (event.target?.result as string).split(',')[1];
-            const res = await fetch('/api/references/upload', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                fileName,
-                fileBase64: base64,
-                category: editRefData.category,
-                label: editRefData.label,
-                mode: editRefData.mode,
-                assignedPromptIds: editRefData.mode === 'all' ? [] : editRefData.assignedPromptIds,
-                refId: cleanId,
-              }),
-            });
-            const data = await res.json();
-            if (!res.ok || !data.success) {
-              setEditError(data.error || 'File replacement failed.');
-              return;
-            }
-            // Replace the reference in the array
-            const updatedRefs = currentReferences.map((r) =>
-              r.id === editingRefId
-                ? { ...data.reference, id: cleanId, label: editRefData.label, category: editRefData.category, assignedMode: editRefData.mode, assignedPromptIds: editRefData.mode === 'all' ? [] : editRefData.assignedPromptIds }
-                : r
-            );
-            await updateReferences(updatedRefs);
-            setShowEditModal(false);
-            setEditingRefId(null);
-            setEditRefData(null);
-            setEditError(null);
-          } catch (err: any) {
-            setEditError(err.message || 'File replacement failed.');
-          }
-        };
-        reader.readAsDataURL(editRefData.file);
+        await uploadReferenceMedia(editRefData.file, {
+          refId: cleanId,
+          label: editRefData.label,
+          category: editRefData.category,
+          mode: editRefData.mode,
+          assignedPromptIds: editRefData.assignedPromptIds,
+        });
       } catch (err: any) {
-        setEditError(err.message || 'Failed to process replacement file.');
-      }
-      return;
-    }
-
-    // No file replacement - just update metadata
-    const updatedRefs = currentReferences.map((r) =>
-      r.id === editingRefId
-        ? {
-            ...r,
-            id: cleanId,
-            name: editRefData.name,
-            label: editRefData.label,
-            category: editRefData.category,
-            assignedMode: editRefData.mode,
-            assignedPromptIds: editRefData.mode === 'all' ? [] : editRefData.assignedPromptIds,
-          }
-        : r
-    );
-
-    try {
-      await updateReferences(updatedRefs);
-      setShowEditModal(false);
-      setEditingRefId(null);
-      setEditRefData(null);
-      setEditError(null);
-    } catch (err: any) {
-      setEditError(err.message || 'Failed to save reference changes.');
-    }
-  };
-
-  const handleLoadSamples = () => {
-    updateReferences(SAMPLE_REFERENCES);
-  };
-
-  const [syncStatus, setSyncStatus] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
-
-  const handleSyncReferences = async () => {
-    if (!currentReferences || !currentBundle) {
-      setSyncStatus({ message: 'No active project or references to synchronize.', type: 'error' });
-      return;
-    }
-
-    setSyncStatus(null);
-
-    try {
-      const res = await fetch('/api/references/sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          references: currentReferences,
-          bundle: currentBundle,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        setSyncStatus({ message: data.error || 'Sync validation failed.', type: 'error' });
+        setEditError(err.message || 'Failed to upload replacement file.');
         return;
       }
-
-      // Update local state with the synchronized references
-      await updateReferences(data.references || currentReferences);
-
-      setSyncStatus({
-        message: data.message || 'Sync complete.',
-        type: 'success',
-      });
-
-      setTimeout(() => setSyncStatus(null), 5000);
-    } catch (err: any) {
-      setSyncStatus({ message: err.message || 'Sync failed.', type: 'error' });
     }
-  };
 
+    const updatedRefs = currentReferences.map((r) =>
+      r.id === editingRefId
+        ? { ...editRefData, id: cleanId, label: editRefData.label, category: editRefData.category, mode: editRefData.mode, assignedPromptIds: editRefData.assignedPromptIds }
+        : r
+    );
+    updateReferences(updatedRefs as ReferenceFile[]);
+    setShowEditModal(false);
+    setEditingRefId(null);
+    setEditRefData(null);
+  };
   const prompts = currentBundle?.prompts || [];
+  const totalRefs = currentReferences.length;
 
   return (
-    <div className="space-y-6">
-      {/* Header & Controls */}
-      <div className="p-6 rounded-xl glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
-        <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="stack">
+      {/* Page Header */}
+      <div className="panel">
+        <div className="heading">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <Images className="w-5 h-5 text-indigo-400" />
-              <h2 className="text-xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                Reference Manager & Prompt Mappings
-              </h2>
-            </div>
-            <p className="text-xs text-[var(--text-secondary)]">
-              Manage visual media assets (images, PDFs) and textual style references assigned across the queue.
-            </p>
+            <h2>Reference Manager &amp; Prompt Mappings</h2>
+            <p>Manage visual media assets (images, PDFs) and textual style references assigned across the queue.</p>
           </div>
-
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="actions">
             <button
-              onClick={handleSyncReferences}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all"
+              onClick={() => setShowAddModal(true)}
+              className="btn primary"
             >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Sync References</span>
-            </button>
-
-            <button
-              onClick={() => handleOpenAddModal('character')}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold ${referenceCount?.atLimit ? 'bg-gray-500 hover:bg-gray-600 text-white opacity-50 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all'}`}
-              disabled={referenceCount?.atLimit}
-            >
-              <Plus className="w-3.5 h-3.5" />
+              <Plus className="icon" />
               <span>Add Reference</span>
             </button>
-            {referenceCount && (
-              <span className={`px-2.5 py-1 rounded text-[10px] font-bold ${
-                referenceCount.atLimit ? 'bg-red-500 text-white' : 'bg-indigo-100 text-indigo-700'
-              }`}>
-                {referenceCount.count}/{referenceCount.max}
-              </span>
-            )}
+            <span className="badge gray">{totalRefs}/20</span>
           </div>
         </div>
       </div>
 
-      {syncStatus && (
-        <div className={`p-4 rounded-lg text-xs font-medium flex items-center gap-2 ${
-          syncStatus.type === 'success'
-            ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
-            : syncStatus.type === 'error'
-              ? 'bg-rose-500/10 border border-rose-500/20 text-rose-400'
-              : 'bg-indigo-500/10 border border-indigo-500/20 text-indigo-400'
-        }`}>
-          {syncStatus.type === 'success' ? (
-            <CheckCircle2 className="w-3 h-3 shrink-0" />
-          ) : syncStatus.type === 'error' ? (
-            <AlertTriangle className="w-3 h-3 shrink-0" />
-          ) : (
-            <Info className="w-3 h-3 shrink-0" />
-          )}
-          <span>{syncStatus.message}</span>
-        </div>
-      )}
-
-      {/* References Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {currentReferences.map((ref) => {
-          const categoryColors: Record<string, string> = {
-            style: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
-            character: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
-            environment: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
-            object: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
-            custom: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-          };
-
-          const isMedia = ref.refType === 'media' || ref.type?.startsWith('image/') || ref.type === 'application/pdf';
-          const isVideo = ref.refType === 'video' || ref.type === 'video/mp4';
-          const isJson = ref.refType === 'json' || ref.type === 'application/json';
-
-          return (
-            <div
-              key={ref.id}
-              className="p-5 rounded-xl border glass-panel space-y-3"
-              style={{ borderColor: 'var(--surface-border)' }}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-white/5 border border-white/10">
-                    {isVideo ? (
-                      <File className="w-5 h-5 text-blue-400" />
-                    ) : isJson ? (
-                      <FileText className="w-5 h-5 text-purple-400" />
-                    ) : ref.type?.startsWith('image/') ? (
-                      <FileImage className="w-5 h-5 text-indigo-400" />
-                    ) : ref.type === 'application/pdf' ? (
-                      <File className="w-5 h-5 text-rose-400" />
+      {/* Reference Cards Grid */}
+      <div className="three">
+        {currentReferences.length > 0 ? (
+          currentReferences.map((ref) => (
+            <article key={ref.id} className="card ref-card">
+              <div className="ref-plate">
+                <span>{ref.category[0].toUpperCase()}</span>
+                <div>
+                  <b>{ref.category === 'style' ? 'AGENT INSTRUCTIONS' : ref.category === 'character' ? 'CHARACTER REFERENCE' : ref.category.toUpperCase()}</b>
+                  <p>{ref.refType === 'text' ? 'Text / Markdown' : 'Image metadata'} · Shared across {prompts.filter(p => (p.referenceIds || []).includes(ref.id)).length} scenes</p>
+                </div>
+              </div>
+              <div className="row between">
+                <div className="row">
+                  <div className="ref-icon">
+                    {ref.refType === 'text' ? (
+                      <FileText className="icon" />
                     ) : (
-                      <FileText className="w-5 h-5 text-amber-400" />
+                      <FileImage className="icon" />
                     )}
                   </div>
                   <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-mono text-xs font-bold text-indigo-400">
-                        {ref.id}
-                      </span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-medium uppercase border ${categoryColors[ref.category] || ''}`}>
-                        {ref.category}
-                      </span>
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-[var(--text-secondary)] font-mono">
-                        {isVideo ? 'VIDEO' : isJson ? 'JSON' : isMedia ? 'MEDIA' : 'TEXT'}
-                      </span>
+                    <b className="indigo-text mono">{ref.id}</b>
+                    <div className="actions" style={{ marginTop: 4 }}>
+                      <span className="badge amber">{ref.category}</span>
+                      <span className="badge gray">{ref.refType?.toUpperCase() ?? 'TEXT'}</span>
                     </div>
-                    <h4 className="text-xs font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>
-                      {ref.label}
-                    </h4>
                   </div>
                 </div>
-
-                <button
-                  onClick={() => handleEditRef(ref)}
-                  className="p-1.5 rounded-lg text-[var(--text-secondary)] hover:text-indigo-400 hover:bg-white/5 transition-colors"
-                  title="Edit reference"
-                  aria-label={`Edit reference ${ref.id}`}
-                >
-                  <Edit2 className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => handleDelete(ref.id)}
-                  className="p-1.5 rounded-lg text-[var(--text-secondary)] hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-                  title="Remove reference"
-                  aria-label={`Remove reference ${ref.id}`}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-
-              {ref.textContent && (
-                <div className="p-2.5 rounded-lg bg-black/30 border border-white/5 text-[11px] font-mono text-[var(--text-secondary)] max-h-20 overflow-y-auto">
-                  {ref.textContent}
+                <div className="actions">
+                  <button
+                    onClick={() => handleEditRef(ref)}
+                    className="btn quiet icon-only"
+                    title="Edit reference"
+                    aria-label={`Edit reference ${ref.id}`}
+                  >
+                    <Edit2 className="icon" />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(ref.id)}
+                    className="btn quiet icon-only"
+                    title="Delete reference"
+                    aria-label={`Delete reference ${ref.id}`}
+                  >
+                    <Trash2 className="icon" />
+                  </button>
                 </div>
-              )}
-
-              <div className="p-2.5 rounded-lg bg-black/20 border border-white/5 text-xs space-y-1">
-                <div className="flex items-center justify-between text-[11px] text-[var(--text-secondary)]">
-                  <span>Assignment Scope:</span>
-                  <strong className={ref.assignedMode === 'all' ? 'text-indigo-400' : 'text-amber-400'}>
-                    {ref.assignedMode === 'all' ? 'All Prompts' : `Selected Prompts (${ref.assignedPromptIds?.length || 0})`}
-                  </strong>
-                </div>
-
-                {ref.assignedMode === 'selected' && ref.assignedPromptIds && ref.assignedPromptIds.length > 0 && (
-                  <div className="flex flex-wrap gap-1 pt-1">
-                    {ref.assignedPromptIds.map((pId) => (
-                      <span
-                        key={pId}
-                        className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/5 border border-white/10 text-indigo-300"
-                      >
-                        {pId}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-2 text-[10px] text-[var(--text-secondary)] pt-1 border-t border-white/5">
-                <span className="truncate max-w-[200px]" title={ref.path || ref.name}>
-                  File: {ref.name}
-                </span>
-                <span>
-                  {ref.size ? `${(ref.size / 1024).toFixed(1)} KB` : 'N/A'} &bull; {ref.type || 'text'}
-                </span>
-                {ref.checksum && (
-                  <span className="font-mono flex items-center gap-0.5 text-indigo-400/80">
-                    <Hash className="w-2.5 h-2.5" />
-                    {ref.checksum.substring(0, 8)}...
-                  </span>
-                )}
+              <h3>{ref.label}</h3>
+              <div className="scope">
+                <span className="muted">Assignment Scope:</span> &nbsp;<span className="badge">{ref.assignedMode === 'all' ? 'All Prompts' : 'Selected Prompts'}</span>
               </div>
+              <small>
+                File: {ref.name}<br />
+                {ref.size} bytes · {ref.type} &nbsp;{ref.checksum || ''}
+              </small>
+            </article>
+          ))
+        ) : (
+          <div className="card">
+            <div className="empty">
+              <div className="big-icon">
+                <Images className="icon" />
+              </div>
+              <h3>No references configured</h3>
+              <p>Upload character concept art, style guide images, or specify textual guidelines.</p>
             </div>
-          );
-        })}
+          </div>
+        )}
       </div>
 
-      {currentReferences.length === 0 && (
-        <div className="p-12 rounded-xl text-center glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
-          <Images className="w-10 h-10 text-[var(--text-secondary)] mx-auto mb-3 opacity-40" />
-          <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
-            No References Configured
-          </h4>
-          <p className="text-xs text-[var(--text-secondary)] max-w-md mx-auto mb-4">
-            Upload character concept art, style guide images, or specify textual guidelines. References are automatically attached or injected into browser prompts.
-          </p>
-          <div className="flex justify-center gap-3">
-            <button
-              onClick={handleLoadSamples}
-              className="px-4 py-2 rounded-lg text-xs font-semibold bg-white/10 hover:bg-white/15 text-white"
-            >
-              Load Sample Presets
-            </button>
-            <button
-              onClick={() => handleOpenAddModal('character')}
-              className="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white"
-            >
-              Add Your First Reference
-            </button>
+      {/* Effective Reference Set per Prompt */}
+      <section className="panel">
+        <div className="heading">
+          <div>
+            <h2>Effective Reference Set per Prompt (Preflight Summary)</h2>
+            <p></p>
           </div>
-        </div>
-      )}
-
-      {/* Preflight Summary Matrix */}
-      {prompts.length > 0 && (
-        <div className="p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
-              Effective Reference Set per Prompt (Preflight Summary)
-            </h3>
-            <button
-              onClick={() => setActivePage('monitor')}
-              className="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1"
-            >
+          <div className="actions">
+            <a className="btn quiet" href="#monitor">
+              <ArrowRight className="icon" />
               <span>Go to Run Monitor</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
-
-          <div className="max-h-64 overflow-y-auto space-y-2 pr-1">
-            {prompts.slice(0, 10).map((p) => {
-              const effectiveRefs = currentReferences.filter(
-                (r) => r.assignedMode === 'all' || (r.assignedPromptIds && r.assignedPromptIds.includes(p.id))
-              );
-
-              return (
-                <div
-                  key={p.id}
-                  className="p-2.5 rounded-lg border glass-card flex items-center justify-between gap-3 text-xs"
-                  style={{ borderColor: 'var(--surface-border)' }}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-indigo-400 w-16">{p.id}</span>
-                    <span className="text-[var(--text-secondary)] truncate max-w-sm">{p.prompt}</span>
-                  </div>
-                  <div className="flex items-center gap-1 shrink-0">
-                    {effectiveRefs.length > 0 ? (
-                      effectiveRefs.map((r) => (
-                        <span
-                          key={r.id}
-                          className="px-2 py-0.5 rounded text-[10px] font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20"
-                        >
-                          {r.id}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="text-[11px] text-[var(--text-secondary)]">None</span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          {prompts.length > 10 && (
-            <div className="text-[11px] text-[var(--text-secondary)] text-center">
-              + {prompts.length - 10} more prompts verified in bundle
-            </div>
-          )}
         </div>
-      )}
+        {prompts.length > 0 ? (
+          prompts.map((prompt) => {
+            const assignedRefs = currentReferences.filter((ref) =>
+              (ref.assignedPromptIds || []).includes(prompt.id) || ref.assignedMode === 'all'
+            );
+            return (
+              <div key={prompt.id} className="mapping-row">
+                <b className="mono indigo-text">{prompt.id}</b>
+                <div>
+                  <p>{prompt.prompt}</p>
+                  <button
+                    aria-controls={`mapping-prompt-${prompt.id}`}
+                    aria-expanded="false"
+                    className="mapping-expand"
+                    data-expand=""
+                    type="button"
+                  >
+                    Read full prompt ↓
+                  </button>
+                </div>
+                <div className="actions">
+                  {assignedRefs.map((ref) => (
+                    <span key={ref.id} className="badge">{ref.id}</span>
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <section className="panel">
+            <h3>No prompts found in current project</h3>
+            <p>Click “Import .JSON File” or “Paste JSON” to load your prompt bundle.</p>
+            <div className="actions" style={{ marginTop: 12 }}>
+              <button
+                className="btn"
+                disabled
+                title="Application operation unavailable in this offline visual prototype"
+              >
+                Load Sample Presets
+              </button>
+              <a className="btn primary" href="#bundle">
+                <svg aria-hidden="true" className="icon" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.65" viewBox="0 0 24 24">
+                  <path d="M8 3h13v13H8z M3 8v13h13 M8 13l4-4 4 4 2-2 3 3 M16 6h.01" />
+                </svg>
+                <span>Add Your First Reference</span>
+              </a>
+            </div>
+          </section>
+        )}
+      </section>
+      {/* Design State Explorer */}
+      <details className="state-explorer">
+        <summary>Inspect reference states and alternate assignment scope</summary>
+        <div className="state-content">
+          <div className="notice green">
+            <svg aria-hidden="true" className="icon" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.65" viewBox="0 0 24 24">
+              <path d="M12 8v5 M12 17h.01 M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18" />
+            </svg>
+            <div>
+              <b>References synchronized.</b> Library and prompt mappings are aligned. This is a static reference state.
+            </div>
+          </div>
+          <div className="card">
+            <b>Selected Prompt IDs</b>
+            <div className="actions" style={{ marginTop: 10 }}>
+              {prompts.map((p) => (
+                <span key={p.id} className="badge">{p.id}</span>
+              ))}
+            </div>
+          </div>
+          <section className="panel">
+            <h3>No References Configured</h3>
+            <p>Upload character concept art, style guide images, or specify textual guidelines.</p>
+            <div className="actions" style={{ marginTop: 12 }}>
+              <button
+                className="btn"
+                disabled
+                title="Application operation unavailable in this offline visual prototype"
+              >
+                Load Sample Presets
+              </button>
+              <a className="btn primary" href="#add-reference-upload">
+                <Plus className="icon" />
+                <span>Add Your First Reference</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </details>
 
       {/* Add Reference Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-lg p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
-            <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
-              Add Reference Asset
-            </h3>
-
-            {modalError && (
-              <div className="p-2.5 rounded text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20">
-                {modalError}
-              </div>
-            )}
-
-            <form onSubmit={handleSaveReference} className="space-y-4 text-xs">
-              {/* Entry Method Selector */}
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setEntryMethod('upload')}
-                  className={`p-2.5 rounded-lg border text-center font-semibold transition-all ${
-                    entryMethod === 'upload'
-                      ? 'border-indigo-500 bg-indigo-500/10 text-indigo-300'
-                      : 'border-white/10 hover:border-white/20 text-[var(--text-secondary)]'
-                  }`}
-                >
-                  <UploadCloud className="w-4 h-4 mx-auto mb-1" />
-                  <div className="font-semibold leading-tight">Upload Media</div>
-                  <div className="text-[9px] opacity-75">PNG, JPG, WebP, GIF, SVG, PDF, TXT, MD, JSON</div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEntryMethod('write')}
-                  className={`p-2.5 rounded-lg border text-center font-semibold transition-all ${
-                    entryMethod === 'write'
-                      ? 'border-indigo-500 bg-indigo-500/10 text-indigo-300'
-                      : 'border-white/10 hover:border-white/20 text-[var(--text-secondary)]'
-                  }`}
-                >
-                  <FileText className="w-4 h-4 mx-auto mb-1" />
-                  <div className="font-semibold leading-tight">Write Text</div>
-                  <div className="text-[9px] opacity-75">Enter instructions directly</div>
-                </button>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                  Reference ID *
-                </label>
+        <div className="modal" style={{ display: 'flex' }} role="dialog" aria-modal="true">
+          <div className="modal-box">
+            <div className="modal-heading">
+              <h3>Add Reference Asset</h3>
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="btn quiet icon-only"
+                aria-label="Close dialog"
+              >
+                <X className="icon" />
+              </button>
+            </div>
+            <div className="two" style={{ marginBottom: 18 }}>
+              <a className="btn primary" href="#add-reference-upload">
+                <UploadCloud className="icon" />
+                <span>Upload Media</span>
+              </a>
+              <a className="btn" href="#add-reference-text">
+                <FileText className="icon" />
+                <span>Write Text</span>
+              </a>
+            </div>
+            <div className="two">
+              <div className="field">
+                <div className="label">Reference ID *</div>
                 <input
-                  type="text"
-                  required
+                  className="input"
                   value={refId}
                   onChange={(e) => setRefId(e.target.value)}
-                  placeholder="e.g. REF-CHAR-01"
-                  className="w-full px-3 py-2 rounded-lg glass-card outline-none font-mono"
-                  style={{ color: 'var(--text-primary)' }}
+                  placeholder="e.g. REF-CHARACTER-03"
                 />
               </div>
-
-              <div>
-                <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                  Descriptive Label *
-                </label>
+              <div className="field">
+                <div className="label">Descriptive Label *</div>
                 <input
-                  type="text"
-                  required
+                  className="input"
                   value={label}
                   onChange={(e) => setLabel(e.target.value)}
-                  placeholder="e.g. Detective Kane Character Sheet"
-                  className="w-full px-3 py-2 rounded-lg glass-card outline-none"
-                  style={{ color: 'var(--text-primary)' }}
+                  placeholder="e.g. Protagonist Front View"
                 />
               </div>
-
-              {entryMethod === 'write' ? (
-                <div>
-                  <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                    Text Content *
-                  </label>
-                  <textarea
-                    rows={4}
-                    value={textContent}
-                    onChange={(e) => setTextContent(e.target.value)}
-                    placeholder="Enter instructions, descriptions, character details, visual guidelines, or other reference information..."
-                    className="w-full px-3 py-2 rounded-lg glass-card outline-none font-mono"
-                    style={{ color: 'var(--text-primary)' }}
-                  />
-                </div>
-              ) : (
-                <div>
-                  <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                    Supported formats: PNG, JPG, JPEG, WebP, GIF, SVG, PDF, TXT, MD, JSON.
-                  </label>
-                  <label className="border-2 border-dashed border-white/20 hover:border-indigo-500 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors bg-white/5">
-                    <UploadCloud className="w-6 h-6 text-indigo-400 mb-1" />
-                    <span className="text-xs font-medium text-white">
-                      {selectedFile ? selectedFile.name : 'Click to select file'}
-                    </span>
-                    <span className="text-[10px] text-[var(--text-secondary)] mt-0.5">
-                      {selectedFile ? `${(selectedFile.size / 1024).toFixed(1)} KB` : 'File will be validated and SHA-256 hashed'}
-                    </span>
-                    <input
-                      type="file"
-                      accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,application/pdf,text/plain,text/markdown,application/json,.txt,.md,.markdown,.json"
-                      onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              )}
-
-              {uploadProgress && (
-                <div className="p-3 rounded-lg bg-indigo-500/10 border border-indigo-500/20 space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium text-indigo-300 truncate max-w-[140px]">
-                      {uploadProgress.fileName}
-                    </span>
-                    <span className="font-mono text-indigo-400">{uploadProgress.progress}%</span>
-                  </div>
-                  <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-300 ${
-                        uploadProgress.status === 'error'
-                          ? 'bg-rose-500'
-                          : uploadProgress.status === 'complete'
-                            ? 'bg-emerald-500'
-                            : 'bg-indigo-500'
-                      }`}
-                      style={{ width: `${Math.min(100, Math.max(0, uploadProgress.progress))}%` }}
-                    />
-                  </div>
-                  <p className="text-[10px] text-[var(--text-secondary)] capitalize">
-                    {uploadProgress.status}
-                  </p>
-                </div>
-              )}
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                    Category
-                  </label>
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value as ReferenceCategory)}
-                    className="w-full px-3 py-2 rounded-lg glass-card outline-none"
-                    style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-secondary)' }}
-                  >
-                    <option value="character">Character Reference</option>
-                    <option value="style">Style Reference</option>
-                    <option value="environment">Environment Reference</option>
-                    <option value="object">Object Reference</option>
-                    <option value="custom">Custom Reference</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                    Assignment Scope
-                  </label>
-                  <select
-                    value={mode}
-                    onChange={(e) => setMode(e.target.value as 'all' | 'selected')}
-                    className="w-full px-3 py-2 rounded-lg glass-card outline-none"
-                    style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-secondary)' }}
-                  >
-                    <option value="selected">Selected Prompt IDs</option>
-                    <option value="all">All Prompts</option>
-                  </select>
-                </div>
+            </div>
+            <div className="field">
+              <div className="label">Category</div>
+              <select
+                className="select input"
+                value={category}
+                onChange={(e) => setCategory(e.target.value as ReferenceCategory)}
+              >
+                <option value="style">Style Reference</option>
+                <option value="character">Character Reference</option>
+                <option value="environment">Environment Reference</option>
+                <option value="object">Object Reference</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div className="field">
+              <div className="label">Assignment Scope</div>
+              <select
+                className="select input"
+                value={mode}
+                onChange={(e) => setMode(e.target.value as 'all' | 'selected')}
+              >
+                <option value="all">All Prompts</option>
+                <option value="selected">Selected Prompt IDs</option>
+              </select>
+            </div>
+            {mode === 'selected' && (
+              <div className="field">
+                <div className="label">Target Prompt IDs (comma-separated)</div>
+                <input
+                  className="input mono"
+                  value={selectedIdsText}
+                  onChange={(e) => setSelectedIdsText(e.target.value)}
+                  placeholder="IMG-001, IMG-002"
+                />
               </div>
-
-              {mode === 'selected' && (
-                <div>
-                  <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                    Target Prompt IDs (comma-separated)
-                  </label>
+            )}
+            {entryMethod === 'write' ? (
+              <div className="field">
+                <div className="label">Text Content *</div>
+                <textarea
+                  className="textarea"
+                  value={textContent}
+                  onChange={(e) => setTextContent(e.target.value)}
+                  placeholder="Enter reference instructions, style rules, or character descriptions…"
+                />
+              </div>
+            ) : (
+              <>
+                <div className="label">Reference Media File *</div>
+                <div className="dropzone">
+                  <Upload className="icon" />
+                  <span>Click to select file</span>
                   <input
-                    type="text"
-                    value={selectedIdsText}
-                    onChange={(e) => setSelectedIdsText(e.target.value)}
-                    placeholder="IMG-001, IMG-003, IMG-005"
-                    className="w-full px-3 py-2 rounded-lg glass-card outline-none font-mono"
-                    style={{ color: 'var(--text-primary)' }}
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,application/pdf,text/plain,text/markdown,application/json,.txt,.md,.markdown,.json"
+                    onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+                    hidden
                   />
                 </div>
-              )}
-
-              <div className="flex justify-end gap-2 pt-3">
-                <button
-                  type="button"
-                  disabled={uploading}
-                  onClick={() => setShowAddModal(false)}
-                  className="px-3.5 py-2 rounded-lg text-xs font-medium hover:bg-white/10"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={uploading}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-50"
-                >
-                  {uploading ? 'Uploading & Hashing...' : 'Save Reference'}
-                </button>
-              </div>
-            </form>
+                <p className="hint">
+                  Supported formats: PNG, JPG, JPEG, WebP, GIF, SVG, PDF, TXT, MD, JSON.
+                </p>
+              </>
+            )}
+            <div className="modal-footer">
+              <button onClick={() => setShowAddModal(false)} className="btn">
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveReference}
+                disabled={uploading}
+                className="btn primary"
+              >
+                {uploading ? 'Adding...' : 'Add Reference'}
+              </button>
+            </div>
           </div>
         </div>
       )}
 
       {/* Edit Reference Modal */}
       {showEditModal && editRefData && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-md p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>
-                Edit Reference
-              </h3>
+        <div className="modal" style={{ display: 'flex' }} role="dialog" aria-modal="true">
+          <div className="modal-box narrow">
+            <div className="modal-heading">
+              <h3>Edit Reference</h3>
               <button
                 onClick={handleCancelEditRef}
-                className="text-xs text-[var(--text-secondary)] hover:text-white"
+                className="btn quiet icon-only"
+                aria-label="Close dialog"
               >
-                Cancel
+                <X className="icon" />
               </button>
             </div>
-
-            <div>
-              <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                Reference ID *
-              </label>
+            <div className="field">
+              <div className="label">Reference ID *</div>
               <input
-                type="text"
-                required
+                className="input"
                 value={editRefData.id}
                 onChange={(e) => setEditRefData({ ...editRefData, id: e.target.value })}
-                placeholder="e.g. REF-CHAR-01"
-                className="w-full px-3 py-2 rounded-lg glass-card outline-none font-mono"
-                style={{ color: 'var(--text-primary)' }}
               />
             </div>
-
-            <div>
-              <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                Descriptive Label *
-              </label>
+            <div className="field">
+              <div className="label">Descriptive Label *</div>
               <input
-                type="text"
-                required
+                className="input"
                 value={editRefData.label}
                 onChange={(e) => setEditRefData({ ...editRefData, label: e.target.value })}
-                placeholder="e.g. Detective Kane Character Sheet"
-                className="w-full px-3 py-2 rounded-lg glass-card outline-none"
-                style={{ color: 'var(--text-primary)' }}
               />
             </div>
-
-            <div>
-              <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                Category
-              </label>
+            <div className="field">
+              <div className="label">Category</div>
               <select
+                className="select input"
                 value={editRefData.category}
                 onChange={(e) => setEditRefData({ ...editRefData, category: e.target.value as ReferenceCategory })}
-                className="w-full px-3 py-2 rounded-lg glass-card outline-none"
-                style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-secondary)' }}
               >
-                <option value="character">Character Reference</option>
                 <option value="style">Style Reference</option>
+                <option value="character">Character Reference</option>
                 <option value="environment">Environment Reference</option>
                 <option value="object">Object Reference</option>
-                <option value="custom">Custom Reference</option>
+                <option value="custom">Custom</option>
               </select>
             </div>
-
-            <div>
-              <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                Assignment Scope
-              </label>
+            <div className="field">
+              <div className="label">Assignment Scope</div>
               <select
+                className="select input"
                 value={editRefData.mode}
                 onChange={(e) => setEditRefData({ ...editRefData, mode: e.target.value as 'all' | 'selected' })}
-                className="w-full px-3 py-2 rounded-lg glass-card outline-none"
-                style={{ color: 'var(--text-primary)', backgroundColor: 'var(--bg-secondary)' }}
               >
-                <option value="selected">Selected Prompt IDs</option>
                 <option value="all">All Prompts</option>
+                <option value="selected">Selected Prompt IDs</option>
               </select>
             </div>
-
             {editRefData.mode === 'selected' && (
-              <div>
-                <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                  Target Prompt IDs (comma-separated)
-                </label>
+              <div className="field">
+                <div className="label">Target Prompt IDs (comma-separated)</div>
                 <input
-                  type="text"
+                  className="input mono"
                   value={editRefData.assignedPromptIds.join(', ')}
-                  onChange={(e) => setEditRefData({ ...editRefData, assignedPromptIds: e.target.value.split(',').map((s) => s.trim()).filter(Boolean) })}
+                  onChange={(e) =>
+                    setEditRefData({
+                      ...editRefData,
+                      assignedPromptIds: e.target.value.split(',').map((s) => s.trim()).filter(Boolean),
+                    })
+                  }
                   placeholder="IMG-001, IMG-003, IMG-005"
-                  className="w-full px-3 py-2 rounded-lg glass-card outline-none font-mono"
-                  style={{ color: 'var(--text-primary)' }}
                 />
               </div>
             )}
-
-            <div>
-              <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                Replace File (optional)
-              </label>
-              <label className="border-2 border-dashed border-white/20 hover:border-indigo-500 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors bg-white/5">
-                <Upload className="w-6 h-6 text-indigo-400 mb-1" />
-                <span className="text-xs font-medium text-white">
-                  {editRefData.file ? editRefData.file.name : 'Click to select replacement file'}
-                </span>
-                <input
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,application/pdf,text/plain,text/markdown,application/json,.txt,.md,.markdown,.json"
-                  onChange={(e) => setEditRefData({ ...editRefData, file: e.target.files?.[0] || null })}
-                  className="hidden"
-                />
-              </label>
-              {editRefData.file && (
-                <p className="text-[10px] text-[var(--text-secondary)] mt-0.5">
-                  {`${(editRefData.file.size / 1024).toFixed(1)} KB`}
-                </p>
-              )}
+            <div className="label">Replace File (optional)</div>
+            <div className="dropzone">
+              <Upload className="icon" />
+              <span>Click to select replacement file</span>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,application/pdf,text/plain,text/markdown,application/json,.txt,.md,.markdown,.json"
+                onChange={(e) => setEditRefData({ ...editRefData, file: e.target.files?.[0] || null })}
+                hidden
+              />
             </div>
-
             {editError && (
-              <p className="text-[10px] text-rose-400">{editError}</p>
+              <p className="text-[10px] text-red-text">{editError}</p>
             )}
-
-            <div className="flex justify-end gap-2 pt-3">
-              <button
-                type="button"
-                onClick={handleCancelEditRef}
-                className="px-3.5 py-2 rounded-lg text-xs font-medium hover:bg-white/10"
-              >
+            <div className="modal-footer">
+              <button onClick={handleCancelEditRef} className="btn">
                 Cancel
               </button>
               <button
-                type="button"
                 onClick={handleSaveEditRef}
-                className="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white"
+                disabled={uploading}
+                className="btn primary"
               >
-                Save Changes
+                {uploading ? 'Saving...' : 'Save Changes'}
               </button>
             </div>
           </div>
