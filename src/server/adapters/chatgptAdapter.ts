@@ -351,16 +351,29 @@ export class ChatGPTAdapter implements IProviderAdapter {
       },
     });
 
-    // Verify readiness and classify page state
-    const readiness = await this.sessionManager.checkProviderReadiness('chatgpt', this.conversationUrl);
-    if (!readiness.ready) {
+    // Verify readiness and classify page state.
+    // ChatGPT is a SPA that may take time to fully initialize.
+    // Use a bounded retry loop (up to 30s) instead of failing immediately.
+    const readinessTimeoutMs = 30000;
+    const readinessPollMs = 1000;
+    const readinessStart = Date.now();
+    let readiness: any = null;
+    while (Date.now() - readinessStart < readinessTimeoutMs) {
+      readiness = await this.sessionManager.checkProviderReadiness('chatgpt', this.conversationUrl);
+      if (readiness.ready) break;
       if (readiness.state === 'LOGIN_REQUIRED' || readiness.state === 'SECURITY_CHALLENGE') {
         throw new Error(`Authentication required: ${readiness.reason}`);
-      } else if (readiness.state === 'PROVIDER_LIMIT') {
-        throw new Error(`Provider limit: ${readiness.reason}`);
-      } else {
-        throw new Error(`Provider not ready (${readiness.state}): ${readiness.reason}`);
       }
+      if (readiness.state === 'PROVIDER_LIMIT') {
+        throw new Error(`Provider limit: ${readiness.reason}`);
+      }
+      console.log(
+        `[chatgptAdapter/init] waiting for ChatGPT readiness: state=${readiness.state} reason=${readiness.reason} elapsed=${Date.now() - readinessStart}ms`
+      );
+      await this.page.waitForTimeout(readinessPollMs);
+    }
+    if (!readiness || !readiness.ready) {
+      throw new Error(`Provider not ready (${readiness?.state || 'UNKNOWN'}): ${readiness?.reason || 'Timed out waiting for ChatGPT to initialize.'}`);
     }
   }
 
@@ -385,11 +398,25 @@ export class ChatGPTAdapter implements IProviderAdapter {
         }
       } catch {}
 
-      // 1. Confirm no prior generation is actively running
+      // 1. Confirm no prior generation is actively running.
+      // ChatGPT may still show a "Stop generating" button briefly after the image
+      // has been detected as stable. Wait a bounded time for it to disappear.
       const stopButtonSelector =
         'button[data-testid="stop-button"], button[aria-label="Stop generating"], button[aria-label="Stop streaming"], button[aria-label*="Stop"]';
-      const stopButton = await this.page.$(stopButtonSelector);
-      if (stopButton && (await stopButton.isVisible().catch(() => false))) {
+      const stopWaitTimeoutMs = 15000;
+      const stopPollMs = 500;
+      const stopStart = Date.now();
+      let stopButtonVisible = false;
+      while (Date.now() - stopStart < stopWaitTimeoutMs) {
+        const stopButton = await this.page.$(stopButtonSelector);
+        stopButtonVisible = stopButton ? await stopButton.isVisible().catch(() => false) : false;
+        if (!stopButtonVisible) break;
+        console.log(
+          `[chatgptAdapter/submitPrompt] stop button still visible, waiting for ChatGPT to become idle: elapsed=${Date.now() - stopStart}ms`
+        );
+        await this.page.waitForTimeout(stopPollMs);
+      }
+      if (stopButtonVisible) {
         return {
           success: false,
           error: 'A previous generation is still actively running in ChatGPT. Cannot submit new prompt.',
@@ -1037,12 +1064,49 @@ export class ChatGPTAdapter implements IProviderAdapter {
           this.lastReadySignature = signature;
           this.stableSince = Date.now();
         } else if (Date.now() - this.stableSince >= 2000) {
-          // Same ready image observed for at least 2 seconds: generation is complete.
+          // Same ready image observed for at least 2 seconds: image is stable.
+          // But the image becoming visible does NOT mean ChatGPT has finished generating.
+          // Wait for ChatGPT to return to idle (no stop button visible, composer enabled)
+          // before reporting success, to prevent submitting the next prompt while still generating.
+          const stopButtonSelector =
+            'button[data-testid="stop-button"], button[aria-label="Stop generating"], button[aria-label="Stop streaming"], button[aria-label*="Stop"]';
+          const idleWaitTimeoutMs = 30000;
+          const idlePollMs = 500;
+          const idleStart = Date.now();
+          let chatGPTIdle = false;
+          while (Date.now() - idleStart < idleWaitTimeoutMs) {
+            const stopButton = await this.page.$(stopButtonSelector).catch(() => null);
+            const stopVisible = stopButton ? await stopButton.isVisible().catch(() => false) : false;
+            if (!stopVisible) {
+              const composerEnabled = await this.page
+                .evaluate(() => {
+                  const sel = '#prompt-textarea, textarea[placeholder*="Message"], div[contenteditable="true"]';
+                  const el: any = document.querySelector(sel);
+                  if (!el) return false;
+                  if (el.hasAttribute('disabled') || el.getAttribute('aria-disabled') === 'true') return false;
+                  return true;
+                })
+                .catch(() => true);
+              if (composerEnabled) {
+                chatGPTIdle = true;
+                break;
+              }
+            }
+            console.log(
+              `[chatgptAdapter/detection] image stable but ChatGPT still generating: elapsed=${Date.now() - idleStart}ms`
+            );
+            await this.page.waitForTimeout(idlePollMs);
+          }
+          if (!chatGPTIdle) {
+            console.log(
+              `[chatgptAdapter/detection] ChatGPT did not become idle within ${idleWaitTimeoutMs}ms, proceeding anyway`
+            );
+          }
           this.isGenerating = false;
           this.lastReadySignature = '';
           this.stableSince = 0;
           console.log(
-            `[chatgptAdapter/detection] READY: image stable for 2s, returning SUCCESS after ${Date.now() - startTime}ms`
+            `[chatgptAdapter/detection] READY: image stable for 2s + idle confirmed=${chatGPTIdle}, returning SUCCESS after ${Date.now() - startTime}ms`
           );
           return { ready: true, outcome: 'SUCCESS', stillGenerating: false };
         }

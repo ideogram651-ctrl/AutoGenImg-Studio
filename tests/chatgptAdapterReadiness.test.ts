@@ -65,6 +65,12 @@ class MockPage {
       return undefined as unknown as R;
     }
 
+    if (funcStr.includes('prompt-textarea') || funcStr.includes('contenteditable')) {
+      // Composer-enabled check for idle-state detection: return true (composer is enabled)
+      return true as unknown as R;
+    }
+
+
     if (funcStr.includes('generated-image-preview')) {
       // Detailed image detection: return array of { src, turnKey, ready } objects
       if (funcStr.includes('turnKey') || funcStr.includes('naturalWidth')) {
