@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { AppProvider, useApp } from './context/AppContext.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
 import { UtilityBar } from './components/UtilityBar.tsx';
@@ -18,11 +18,21 @@ function MainLayout() {
   const { activePage, currentProject, queueState, runtimeStatus, startRun, setActivePage } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const openCreateModal = useCallback(() => setCreateModalOpen(true), []);
   const closeCreateModal = useCallback(() => setCreateModalOpen(false), []);
   const openMobileMenu = useCallback(() => setMobileMenuOpen(true), []);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
+  const toggleSidebarCollapse = useCallback(() => setSidebarCollapsed((prev) => !prev), []);
+
+  useEffect(() => {
+    if (sidebarCollapsed) {
+      document.body.classList.add('nav-collapsed');
+    } else {
+      document.body.classList.remove('nav-collapsed');
+    }
+  }, [sidebarCollapsed]);
 
   const activePageElement = useMemo(() => {
     switch (activePage) {
@@ -70,10 +80,10 @@ function MainLayout() {
 
   return (
     <div className="app">
-      <Sidebar mobileOpen={mobileMenuOpen} onCloseMobile={closeMobileMenu} />
+      <Sidebar collapsed={sidebarCollapsed} onToggleCollapse={toggleSidebarCollapse} />
 
       <main className="viewport" id="studio-main" tabIndex={-1}>
-        <UtilityBar onToggleNav={openMobileMenu} />
+        <UtilityBar onToggleNav={toggleSidebarCollapse} />
 
         <section aria-label={meta.title} className="page default" id={activePage}>
           <header className="app-header">

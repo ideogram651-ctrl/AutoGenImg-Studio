@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   LayoutDashboard,
   Sliders,
@@ -9,9 +9,6 @@ import {
   AlertCircle,
   FileText,
   Settings,
-  Sun,
-  Moon,
-  Sparkles,
   FolderOpen,
   Image as ImageIcon,
 } from 'lucide-react';
@@ -24,7 +21,7 @@ interface NavItem {
   badge?: number;
 }
 
-export function Sidebar({ mobileOpen, onCloseMobile }: { mobileOpen?: boolean; onCloseMobile?: () => void }) {
+export function Sidebar({ collapsed, onToggleCollapse }: { collapsed?: boolean; onToggleCollapse?: () => void }) {
   const { activePage, setActivePage, theme, setTheme, currentProject, queueState, manifest } = useApp();
 
   const reviewCount = manifest?.reviewCount || queueState.reviewCount || 0;
@@ -45,7 +42,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }: { mobileOpen?: boolean; o
       ],
     },
     {
-      label: 'Generate',
+      label: 'Production',
       items: [
         { id: 'monitor', label: 'Generation monitor', icon: Activity },
         { id: 'gallery', label: 'Asset gallery', icon: ImageIcon },
@@ -54,7 +51,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }: { mobileOpen?: boolean; o
       ],
     },
     {
-      label: 'System',
+      label: 'Resources',
       items: [
         { id: 'how_to_use', label: 'Getting started', icon: BookOpen },
         { id: 'settings', label: 'Preferences', icon: Settings },
@@ -62,10 +59,9 @@ export function Sidebar({ mobileOpen, onCloseMobile }: { mobileOpen?: boolean; o
     },
   ];
 
-  const handleNavClick = (id: PageId) => {
+  const handleNavClick = useCallback((id: PageId) => {
     setActivePage(id);
-    if (onCloseMobile) onCloseMobile();
-  };
+  }, [setActivePage]);
 
   return (
     <aside className="sidebar" id="studio-navigation">
@@ -109,24 +105,32 @@ export function Sidebar({ mobileOpen, onCloseMobile }: { mobileOpen?: boolean; o
         ))}
       </nav>
 
+      <div className="inventory-access">
+        <a className="muted" href="#inventory">
+          Prototype &amp; screen index ↗
+        </a>
+      </div>
+
       <div className="sidebar-foot">
-        {currentProject ? (
-          <div className="project-context">
-            <small>Active project</small>
-            <strong>{currentProject.name}</strong>
-            <div className="newlaw">
-              <small>{queueState.savedCount} / {queueState.totalPrompts} saved</small>
-            </div>
+        <div className="project-context">
+          <small>
+            <svg aria-hidden="true" className="icon" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.65" viewBox="0 0 24 24">
+              <path d="M3 6h7l2 2h9v12H3z M13 12v5 M10.5 14.5h5" />
+            </svg>
+            Active Project
+          </small>
+          <div className="newlaw">
+            <strong>{currentProject ? currentProject.name : 'new_law'}</strong>
+            <small>{currentProject ? `${queueState.savedCount} / ${queueState.totalPrompts} saved` : '0 / 5 saved'}</small>
           </div>
-        ) : (
-          <div className="project-context">
-            <small>No active project</small>
-            <strong>—</strong>
+          <div className="stickman">
+            <strong>Stickman</strong>
+            <small>5 / 5 saved</small>
           </div>
-        )}
+        </div>
 
         <div className="theme-row">
-          <span>Theme</span>
+          <span>Appearance</span>
           <button
             aria-label={`Switch theme (current: ${theme})`}
             className="btn tiny"
@@ -138,7 +142,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }: { mobileOpen?: boolean; o
               setTheme(themes[(idx + 1) % themes.length]);
             }}
           >
-            {theme}
+            ◑ Light
           </button>
         </div>
       </div>

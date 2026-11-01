@@ -1,26 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import {
   FolderPlus,
   Play,
   RotateCcw,
-  CheckCircle2,
-  AlertTriangle,
-  XCircle,
-  Clock,
-  Layers,
-  ArrowRight,
-  ExternalLink,
   ShieldCheck,
-  Download,
-  Copy,
-  Trash2,
   Upload,
-  FolderOpen,
-  Check,
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext.tsx';
 import { ProjectSummary } from '../../types/index.ts';
 import { ProjectThumbnail } from '../ProjectThumbnail.tsx';
+import { HeroArt } from '../HeroArt.tsx';
+import { ProjectCard } from '../ProjectCard.tsx';
 
 export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal: () => void }) {
   const {
@@ -98,81 +88,74 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
           <span className="studio-eyebrow">THE VISUAL PRODUCTION WORKSPACE</span>
           <h2>Every frame.<br /><em>Under control.</em></h2>
           <p className="hero-original-title">Orchestrate AI video visuals — from script to saved files.</p>
-          <p>Prepare structured prompt bundles, map multi-category references (character, style, environment), execute sequential browser-driven generation, verify downloads into ID-based files, and review exceptions without blind regeneration.</p>
+          <p>Shape your prompts. Align your references. Follow every generation through to a verified asset.</p>
           <div className="actions">
-            <button
-              onClick={onOpenNewProjectModal}
+            <a
               className="btn primary"
+              href="#create-project"
+              onClick={(e) => { e.preventDefault(); onOpenNewProjectModal(); }}
             >
-              <FolderPlus className="w-4 h-4" />
-              <span>Create Project</span>
-            </button>
-
+              <svg
+                aria-hidden="true"
+                className="icon"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.65"
+                viewBox="0 0 24 24"
+              >
+                <path d="M3 6h7l2 2h9v12H3z M13 12v5 M10.5 14.5h5" />
+              </svg>
+              Create Project
+            </a>
             <label className="btn">
-              <Upload className="w-4 h-4 text-sky-400" />
+              <Upload className="icon" />
               <span>{importLoading ? 'Importing...' : 'Import Project (.ZIP)'}</span>
               <input
                 ref={fileInputRef}
                 type="file"
                 accept=".zip"
                 onChange={handleImportFile}
-                className="hidden"
+                hidden
                 disabled={importLoading}
               />
             </label>
-
-            {currentProject && (
-              <>
-                {canResume ? (
-                  <button
-                    onClick={() => {
-                      resumeRun();
-                      setActivePage('monitor');
-                    }}
-                    className="btn green"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                    <span>Resume Queue ({queueState.pauseReason || 'Paused'})</span>
-                  </button>
-                ) : status === 'RUNNING' ? (
-                  <button
-                    onClick={() => setActivePage('monitor')}
-                    className="btn primary"
-                  >
-                    <Play className="w-4 h-4 fill-current" />
-                    <span>View Running Queue ({queueState.percentage}%)</span>
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      setActivePage('monitor');
-                      startRun();
-                    }}
-                    className="btn green"
-                  >
-                    <Play className="w-4 h-4 fill-current" />
-                    <span>Start Run ({totalPrompts} Prompts)</span>
-                  </button>
-                )}
-              </>
+            {currentProject && status !== 'RUNNING' && (
+              <button
+                className="btn green"
+                type="button"
+                onClick={() => { setActivePage('monitor'); startRun(); }}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.65"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M7 4l14 8-14 8z" />
+                </svg>
+                Start Run ({totalPrompts} Prompts)
+              </button>
             )}
           </div>
+          <details className="hero-context">
+            <summary>How the production chain works</summary>
+            <span className="badge">
+              ♧ Verifiable Local-First Architecture • Visible Browser Automation
+            </span>
+            <p>Prepare structured prompt bundles, map multi-category references (character, style, environment), execute sequential browser-driven generation, verify downloads into ID-based files, and review exceptions without blind regeneration.</p>
+          </details>
         </div>
-        <div className="hero-art">
-          <div className="hero-frame" style={{ backgroundImage: 'url(/assets/artwork/art-1.png)' }} />
-          <div className="hero-frame" style={{ backgroundImage: 'url(/assets/artwork/art-2.png)' }} />
-          <small>Reference artwork</small>
-        </div>
+        <HeroArt projectId={currentProject?.id ?? null} onViewGallery={() => setActivePage('gallery')} />
       </section>
       {saveStatus.kind !== 'idle' && currentProject && (
         <div
-          className={`p-3 rounded-lg text-xs font-medium flex items-center justify-between gap-2 ${
-            saveStatus.kind === 'saving'
-              ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-              : saveStatus.kind === 'saved'
-              ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-              : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
-          }`}
+          className="notice"
         >
           <span>
             {saveStatus.kind === 'saving' ? 'Saving…' : saveStatus.kind === 'saved' ? 'Saved' : 'Save failed'}
@@ -183,11 +166,7 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
 
       {importFeedback && (
         <div
-          className={`p-3.5 rounded-lg text-xs font-medium flex items-center justify-between ${
-            importFeedback.includes('error') || importFeedback.includes('Failed')
-              ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
-              : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-          }`}
+          className="notice"
         >
           <span>{importFeedback}</span>
           <button onClick={() => setImportFeedback(null)} className="text-xs opacity-70 hover:opacity-100">
@@ -197,410 +176,318 @@ export function DashboardPage({ onOpenNewProjectModal }: { onOpenNewProjectModal
       )}
 
       {/* 5 Overview Metric Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3.5">
-        <div className="p-4 rounded-xl glass-card">
-          <div className="flex items-center justify-between text-[var(--text-secondary)] mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Total Prompts</span>
-            <Layers className="w-4 h-4" />
+      {/* Stats */}
+      <div className="stats" style={{ '--columns': 5 } as React.CSSProperties}>
+        <div className="stat">
+          <div className="statlabel">
+            Total Prompts
+            <svg
+              aria-hidden="true"
+              className="icon"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.65"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 3L2 8l10 5 10-5z M2 12l10 5 10-5 M2 16l10 5 10-5" />
+            </svg>
           </div>
-          <div className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
-            {totalPrompts}
-          </div>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-1">
-            {currentProject ? `${currentProject.imageIntervalSeconds}s interval` : 'No active project'}
-          </div>
+          <strong>{totalPrompts}</strong>
+          <small>{currentProject ? `${currentProject.imageIntervalSeconds}s interval` : 'No active project'}</small>
         </div>
-
-        <div className="p-4 rounded-xl glass-card">
-          <div className="flex items-center justify-between text-[var(--text-secondary)] mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Saved Images</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+        <div className="stat">
+          <div className="statlabel">
+            Saved Images
+            <svg
+              aria-hidden="true"
+              className="icon"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.65"
+              viewBox="0 0 24 24"
+            >
+              <path d="M4 12l5 5L20 6" />
+            </svg>
           </div>
-          <div className="text-2xl font-bold text-emerald-400">
-            {savedCount}
-          </div>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-1">
-            Verified on disk
-          </div>
+          <strong className="green-text">{savedCount}</strong>
+          <small>Verified on disk</small>
         </div>
-
-        <div className="p-4 rounded-xl glass-card">
-          <div className="flex items-center justify-between text-[var(--text-secondary)] mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Needs Review</span>
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
+        <div className="stat">
+          <div className="statlabel">
+            Needs Review
+            <svg
+              aria-hidden="true"
+              className="icon"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.65"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 8v5 M12 17h.01 M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18" />
+            </svg>
           </div>
-          <div className="text-2xl font-bold text-amber-400">
-            {reviewCount}
-          </div>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-1">
-            No blind regeneration
-          </div>
+          <strong className="amber-text">{reviewCount}</strong>
+          <small>No blind regeneration</small>
         </div>
-
-        <div className="p-4 rounded-xl glass-card">
-          <div className="flex items-center justify-between text-[var(--text-secondary)] mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Failed Items</span>
-            <XCircle className="w-4 h-4 text-rose-400" />
+        <div className="stat">
+          <div className="statlabel">
+            Failed Items
+            <svg
+              aria-hidden="true"
+              className="icon"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.65"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 5l14 14 M19 5L5 19" />
+            </svg>
           </div>
-          <div className="text-2xl font-bold text-rose-400">
-            {failedCount}
-          </div>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-1">
-            Definite errors logged
-          </div>
+          <strong className="red-text">{failedCount}</strong>
+          <small>Definite errors logged</small>
         </div>
-
-        <div className="p-4 rounded-xl glass-card col-span-2 md:col-span-1">
-          <div className="flex items-center justify-between text-[var(--text-secondary)] mb-2">
-            <span className="text-xs uppercase tracking-wider font-semibold">Queue Status</span>
-            <Clock className="w-4 h-4 text-indigo-400" />
+        <div className="stat">
+          <div className="statlabel">
+            Queue Status
+            <svg
+              aria-hidden="true"
+              className="icon"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.65"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18 M12 7v5l4 2" />
+            </svg>
           </div>
-          <div className="text-lg font-bold truncate" style={{ color: 'var(--text-primary)' }}>
-            {status}
-          </div>
-          <div className="text-[11px] text-[var(--text-secondary)] mt-1 truncate">
-            {queueState.percentage}% processed
-          </div>
+          <strong>{status}</strong>
+          <small>{queueState.percentage}% processed</small>
         </div>
       </div>
 
       {/* Persistent Project Library */}
-      <div className="p-6 rounded-xl glass-panel space-y-4" style={{ borderColor: 'var(--surface-border)' }}>
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b" style={{ borderColor: 'var(--surface-border)' }}>
+      {/* Project Library */}
+      <section className="panel">
+        <div className="heading">
           <div>
-            <h3 className="font-bold text-base tracking-tight" style={{ color: 'var(--text-primary)' }}>
-              Project Library
-            </h3>
-            <p className="text-xs text-[var(--text-secondary)]">
-              Saved workflow templates with isolated run outputs and portable archive actions
-            </p>
+            <h2>Project Library</h2>
+            <p>Saved workflow templates with isolated run outputs and portable archive actions</p>
           </div>
-          <span className="text-xs text-[var(--text-secondary)]">
-            {projectsList.length} saved project{projectsList.length === 1 ? '' : 's'}
-          </span>
+          <div className="actions">
+            <small>{projectsList.length} saved project{projectsList.length !== 1 ? 's' : ''}</small>
+          </div>
         </div>
-
-        {projectsList.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-            {projectsList.map((proj) => {
-              const isActive = currentProject?.id === proj.id;
-              return (
-                <div
-                  key={proj.id}
-                  className={`p-4 rounded-xl border transition-all flex flex-col justify-between overflow-hidden ${
-                    isActive
-                      ? 'border-indigo-500 bg-indigo-500/10 shadow-sm'
-                      : 'border-white/10 hover:border-white/20'
-                  }`}
-                  style={{ backgroundColor: isActive ? undefined : 'var(--surface-elevated)' }}
-                >
-                  <div className="h-32 w-full overflow-hidden">
-                    <ProjectThumbnail projectId={proj.id} className="w-full h-full" />
-                  </div>
-
-                  <div className="p-4 space-y-2 flex-1">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <h4 className="font-bold text-xs" style={{ color: 'var(--text-primary)' }}>
-                            {proj.name}
-                          </h4>
-                          {isActive && (
-                            <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300">
-                              Active
-                            </span>
-                          )}
-                        </div>
-                        <span className="text-[10px] text-[var(--text-secondary)] block mt-0.5">
-                          Updated {new Date(proj.updatedAt).toLocaleDateString()}
-                        </span>
-                      </div>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold uppercase bg-white/5 text-[var(--text-secondary)] border border-white/10">
-                        {proj.provider}
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-2 pt-2 text-[11px] text-[var(--text-secondary)] border-t border-white/5">
-                      <div>
-                        <span className="block text-[10px] uppercase">Prompts</span>
-                        <strong className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
-                          {proj.promptCount}
-                        </strong>
-                      </div>
-                      <div>
-                        <span className="block text-[10px] uppercase">Refs</span>
-                        <strong className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
-                          {proj.referenceCount}
-                        </strong>
-                      </div>
-                      <div>
-                        <span className="block text-[10px] uppercase">Last Run</span>
-                        <strong
-                          className={`text-[10px] font-bold ${
-                            proj.lastRunStatus === 'COMPLETED'
-                              ? 'text-emerald-400'
-                              : proj.lastRunStatus === 'PAUSED'
-                              ? 'text-amber-400'
-                              : proj.lastRunStatus === 'RUNNING'
-                              ? 'text-sky-400'
-                              : 'text-[var(--text-secondary)]'
-                          }`}
-                        >
-                          {proj.lastRunStatus || 'None'}
-                        </strong>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Actions */}
-                  <div className="flex flex-wrap items-center justify-between gap-1.5 pt-3 mt-3 border-t border-white/5">
-                    <div className="flex items-center gap-1">
-                      {!isActive ? (
-                        <button
-                          onClick={() => openProject(proj.id)}
-                          className="px-2.5 py-1 rounded text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-sm"
-                        >
-                          Open
-                        </button>
-                      ) : (
-                        <span className="px-2.5 py-1 rounded text-xs font-medium text-emerald-400 flex items-center gap-1">
-                          <Check className="w-3 h-3" />
-                          <span>Loaded</span>
-                        </span>
-                      )}
-
-                      <button
-                        onClick={() => duplicateProject(proj.id)}
-                        className="p-1.5 rounded hover:bg-white/10 text-[var(--text-secondary)] hover:text-white transition-colors"
-                        title="Duplicate as Template"
-                        aria-label="Duplicate as Template"
-                      >
-                        <Copy className="w-3.5 h-3.5" />
-                      </button>
-
-                      <button
-                        onClick={() => exportProject(proj.id)}
-                        className="p-1.5 rounded hover:bg-white/10 text-[var(--text-secondary)] hover:text-white transition-colors"
-                        title="Download Project (ZIP)"
-                        aria-label="Download Project (ZIP)"
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-
-                    <button
-                      onClick={() => setProjectToDelete(proj)}
-                      className="p-1.5 rounded hover:bg-rose-500/10 text-[var(--text-secondary)] hover:text-rose-400 transition-colors"
-                      title="Delete Project"
-                      aria-label="Delete Project"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-center py-10 text-xs text-[var(--text-secondary)]">
-            <FolderOpen className="w-10 h-10 mx-auto mb-2 opacity-40" />
-            <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>No Saved Projects Yet</p>
-            <p className="mt-1">Create a new project or import a portable project .ZIP archive.</p>
-          </div>
-        )}
-      </div>
-
-      {/* Two Column Layout: Current Project Details & Recent Activity Feed */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Active Project Details & Steps */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="p-5 rounded-xl glass-panel" style={{ borderColor: 'var(--surface-border)' }}>
-            <div className="flex items-center justify-between mb-4 pb-3 border-b" style={{ borderColor: 'var(--surface-border)' }}>
-              <div>
-                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
-                  Active Project Status
-                </h3>
-                <p className="text-xs text-[var(--text-secondary)]">
-                  Configured workflow details and execution target
-                </p>
-              </div>
-              {currentProject && (
-                <button
-                  onClick={() => setActivePage('settings_project')}
-                  className="text-xs font-medium text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
-                >
-                  <span>Edit Settings</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            {currentProject ? (
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 rounded-lg bg-black/20 border border-white/5">
-                    <span className="text-[var(--text-secondary)] block text-[11px] uppercase">Project Name</span>
-                    <span className="font-semibold text-sm mt-0.5 block" style={{ color: 'var(--text-primary)' }}>
-                      {currentProject.name}
-                    </span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-black/20 border border-white/5">
-                    <span className="text-[var(--text-secondary)] block text-[11px] uppercase">Execution Mode / Provider</span>
-                    <span className="font-semibold text-sm mt-0.5 block capitalize text-indigo-400">
-                      {currentProject.provider === 'gemini' ? 'Google Gemini' : 'ChatGPT via Chrome'}
-                    </span>
-                  </div>
-                  <div className="p-3 rounded-lg bg-black/20 border border-white/5 sm:col-span-2">
-                    <span className="text-[var(--text-secondary)] block text-[11px] uppercase">Output Directory</span>
-                    <code className="text-xs text-sky-400 font-mono block mt-0.5 break-all">
-                      {currentProject.outputPath}
-                    </code>
-                  </div>
-                </div>
-
-                {/* Progress bar */}
-                <div>
-                  <div className="flex items-center justify-between text-xs mb-1.5">
-                    <span className="font-medium text-[var(--text-secondary)]">Queue Progress</span>
-                    <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>
-                      {queueState.processedCount} of {totalPrompts} prompts ({queueState.percentage}%)
-                    </span>
-                  </div>
-                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                    <div
-                      className="h-full transition-all duration-300 bg-gradient-to-r from-indigo-500 to-emerald-400"
-                      style={{ width: `${queueState.percentage}%` }}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2 pt-1">
-                  <button
-                    onClick={() => setActivePage('monitor')}
-                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/10 hover:bg-white/15 transition-colors"
-                  >
-                    Open Run Monitor
-                  </button>
-                  <button
-                    onClick={() => setActivePage('review')}
-                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/10 hover:bg-white/15 transition-colors flex items-center gap-1.5"
-                  >
-                    <span>Review Center</span>
-                    {reviewCount > 0 && (
-                      <span className="px-1.5 py-0.2 rounded text-[10px] bg-amber-500/20 text-amber-400 font-bold">
-                        {reviewCount}
-                      </span>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => setActivePage('reports')}
-                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-white/10 hover:bg-white/15 transition-colors"
-                  >
-                    View HTML Reports
-                  </button>
-                </div>
-              </div>
+        <div className="rule" />
+        <div className="library-grid">
+            {projectsList.length > 0 ? (
+              projectsList.map((proj) => {
+                const isActive = currentProject?.id === proj.id;
+                return (
+                  <ProjectCard
+                    key={proj.id}
+                    project={{
+                      id: proj.id,
+                      name: proj.name,
+                      outputPath: proj.outputPath,
+                      provider: proj.provider,
+                      createdAt: proj.createdAt,
+                      updatedAt: proj.updatedAt,
+                      promptCount: proj.promptCount,
+                      referenceCount: proj.referenceCount,
+                      savedCount: proj.savedCount,
+                      lastRunStatus: proj.lastRunStatus,
+                    }}
+                    hasImages={false}
+                    imageCount={0}
+                    onOpenProject={openProject}
+                    onViewGallery={() => setActivePage('gallery')}
+                  />
+                );
+              })
             ) : (
-              <div className="text-center py-10 px-4">
-                <Layers className="w-10 h-10 text-[var(--text-secondary)] mx-auto mb-3 opacity-40" />
-                <h4 className="text-sm font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
-                  No Active Project Configured
-                </h4>
-                <p className="text-xs text-[var(--text-secondary)] max-w-md mx-auto mb-4">
-                  Select an existing project from the Project Library above or create a new project to get started.
-                </p>
-                <button
-                  onClick={onOpenNewProjectModal}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm inline-flex items-center gap-2"
-                >
-                  <FolderPlus className="w-4 h-4" />
-                  <span>Create New Project</span>
-                </button>
+              <div className="card">
+                <p>No projects yet. Create your first project to get started.</p>
               </div>
             )}
-          </div>
         </div>
+      </section>
 
-        {/* Right Column: Live Event Stream Feed */}
-        <div className="p-5 rounded-xl glass-panel flex flex-col h-[420px]" style={{ borderColor: 'var(--surface-border)' }}>
-          <div className="flex items-center justify-between mb-3 pb-2 border-b" style={{ borderColor: 'var(--surface-border)' }}>
-            <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>
-              Recent Activity Feed
-            </h3>
-            <span className="text-[11px] text-[var(--text-secondary)]">Live Events</span>
+      {/* Wide Two: Active Project Status + Recent Activity */}
+      <div className="wide-two">
+        <section className="panel">
+          <div className="heading">
+            <div>
+              <h2>Active Project Status</h2>
+              <p>Configured workflow details and execution target</p>
+            </div>
+            <div className="actions">
+              <a className="btn quiet" href="#project">
+                <svg
+                  aria-hidden="true"
+                  className="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.65"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M4 12h16 M14 6l6 6-6 6" />
+                </svg>
+                Edit Settings
+              </a>
+            </div>
           </div>
-
-          <div className="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
-            {logs.length > 0 ? (
-              logs.slice(-15).reverse().map((log) => {
-                const isSuccess = log.severity === 'success';
-                const isWarn = log.severity === 'warn';
+          <div className="two">
+            <div className="value-block">
+              <small>Project Name</small>
+              <b>{currentProject?.name || 'new_law'}</b>
+            </div>
+            <div className="value-block">
+              <small>Execution Mode / Provider</small>
+              <b className="indigo-text">ChatGPT Via Chrome</b>
+            </div>
+          </div>
+          {currentProject && (
+            <div className="value-block path" style={{ marginTop: 12 }}>
+              <small>Output Directory</small>
+              {currentProject.outputPath}
+            </div>
+          )}
+          <div className="row between" style={{ marginTop: 18 }}>
+            <span className="muted">Queue Progress</span>
+            <span>
+              {savedCount} of {totalPrompts} prompts (
+              {Math.round((savedCount / Math.max(totalPrompts, 1)) * 100)}%)
+            </span>
+          </div>
+          <div className="progress">
+            <span
+              style={{
+                width:
+                  totalPrompts > 0
+                    ? Math.round((savedCount / totalPrompts) * 100)
+                    : 0,
+              }}
+            />
+          </div>
+          <div className="actions">
+            <a className="btn" href="#monitor">
+              Open Run Monitor
+            </a>
+            <a className="btn" href="#review">
+              Review Center
+            </a>
+            <a className="btn" href="#reports">
+              View HTML Reports
+            </a>
+          </div>
+        </section>
+        <section className="panel">
+          <div className="heading">
+            <div>
+              <h2>Recent Activity Feed</h2>
+              <p></p>
+            </div>
+            <div className="actions">
+              <small>Live Events</small>
+            </div>
+          </div>
+          <div className="activity" tabIndex={0}>
+            {logs && logs.length > 0 ? (
+              logs.map((log) => {
                 const isError = log.severity === 'error';
-
                 return (
-                  <div
-                    key={log.id}
-                    className="p-2.5 rounded-lg border text-xs"
-                    style={{
-                      backgroundColor: isSuccess
-                        ? 'rgba(34, 197, 94, 0.08)'
-                        : isWarn
-                        ? 'rgba(245, 158, 11, 0.08)'
-                        : isError
-                        ? 'rgba(239, 68, 68, 0.08)'
-                        : 'var(--surface-elevated)',
-                      borderColor: 'var(--surface-border)',
-                    }}
-                  >
-                    <div className="flex items-center justify-between text-[10px] text-[var(--text-secondary)] mb-1">
-                      <span className="font-mono">{log.type}</span>
-                      <span>{new Date(log.timestamp).toLocaleTimeString()}</span>
-                    </div>
-                    <div className="font-medium text-xs leading-snug" style={{ color: 'var(--text-primary)' }}>
-                      {log.promptId && <strong className="text-indigo-400 mr-1">[{log.promptId}]</strong>}
-                      {log.message}
-                    </div>
+                  <div key={log.id} className={`event ${isError ? 'error-event' : ''}`}>
+                    <code>{log.type}</code>
+                    <time>{new Date(log.timestamp).toLocaleTimeString()}</time>
+                    <p>{log.message}</p>
                   </div>
                 );
               })
             ) : (
-              <div className="text-center py-16 text-xs text-[var(--text-secondary)]">
-                No activity logged yet. Start a run or load a bundle to see live event entries.
+              <div className="event">
+                <code>PROJECT_LOADED</code>
+                <time>—</time>
+                <p>No activity logged yet. Start a run or load a bundle to see live event entries.</p>
               </div>
             )}
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Delete Confirmation Modal */}
       {projectToDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="w-full max-w-md p-6 rounded-2xl glass-panel space-y-4 border border-rose-500/30">
-            <div className="flex items-center gap-2 text-rose-400">
-              <AlertTriangle className="w-5 h-5 shrink-0" />
-              <h3 className="text-base font-bold">Permanently Delete Project?</h3>
-            </div>
-            <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-              Are you sure you want to permanently delete project <strong className="text-white">&quot;{projectToDelete.name}&quot;</strong> and its configuration from disk? This action cannot be undone.
-            </p>
-            <div className="p-3 rounded-lg bg-black/30 border border-white/5 text-[11px] font-mono text-[var(--text-secondary)]">
-              Path: {projectToDelete.outputPath}
-            </div>
-            <div className="flex justify-end gap-2 pt-2">
+        <div
+          className="modal"
+          style={{ display: 'flex' }}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="modal-box">
+            <div className="modal-heading">
+              <h3>Permanently Delete Project?</h3>
               <button
-                type="button"
                 onClick={() => setProjectToDelete(null)}
-                className="px-4 py-2 rounded-lg text-xs font-medium hover:bg-white/10"
+                className="btn quiet icon-only"
+                aria-label="Close dialog"
               >
+                <svg
+                  aria-hidden="true"
+                  className="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.65"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 5l14 14 M19 5L5 19" />
+                </svg>
+              </button>
+            </div>
+            <p className="muted">
+              Are you sure you want to permanently delete project{' '}
+              <strong>{projectToDelete.name}</strong> and its configuration from disk? This action cannot be undone.
+            </p>
+            <div className="notice red">
+              <svg
+                aria-hidden="true"
+                className="icon"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.65"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 8v5 M12 17h.01 M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18" />
+              </svg>
+              <div>
+                Project configuration and associated artifacts would be removed in the original application. No deletion is possible in this prototype.
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button onClick={() => setProjectToDelete(null)} className="btn">
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={confirmDelete}
                 disabled={isDeleting}
-                className="px-4 py-2 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-500 text-white transition-all shadow-sm disabled:opacity-50"
+                className="btn danger"
               >
-                {isDeleting ? 'Deleting...' : 'Delete Project Permanently'}
+                {isDeleting ? 'Deleting...' : 'Delete Project'}
               </button>
             </div>
           </div>
